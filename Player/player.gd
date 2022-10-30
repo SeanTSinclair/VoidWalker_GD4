@@ -18,4 +18,3 @@ func set_animation_state(state):
 
 func _physics_process(delta):
 	move_and_slide()
-#	animation_manager.process_player_behaviour(velocity, state_machine.is_dashing, is_on_floor())

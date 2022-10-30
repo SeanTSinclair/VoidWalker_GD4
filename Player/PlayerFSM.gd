@@ -5,6 +5,7 @@ const DASH_SPEED = 800.0
 @onready var player = owner
 
 var is_dashing : bool = false
+var dash_count : int = 0
 var is_on_floor : bool = false
 
 func _ready():
@@ -57,17 +58,18 @@ func jump_transitions():
 	
 func in_air_transitions():
 	if is_on_floor:
+		dash_count = 0
 		current_state = states.idle
-	if Input.is_action_just_pressed("dash") && !is_dashing:
+	if Input.is_action_just_pressed("dash") && dash_count < player.stats.max_dashes:
+		dash_count += 1
 		current_state = states.dash
 		
 func dash_transitions():
-	if is_dashing && is_on_floor:
-		current_state = states.idle
-	if !is_dashing && !is_on_floor:
-		current_state = states.in_air
-	if Input.is_action_just_pressed("jump") && is_on_floor:
-		current_state = states.jump
+	if !is_dashing:
+		if is_on_floor:
+			current_state = states.idle
+		else:
+			current_state = states.in_air
 	
 func set_player_orientation(input_axis):
 	if input_axis.x < 0:

@@ -1,6 +1,7 @@
 extends State
 
 const SPEED = 300.0
+const MAX_SPEED = 500.0
 
 @onready var stats : PlayerStats = preload("res://Player/PlayerStats.tres")
 
@@ -11,7 +12,8 @@ var input_axis = Vector2.ZERO
 
 func state_logic(delta):
 	input_axis = state_machine.get_input_axis()
-	actor.velocity.x = input_axis.x * SPEED
+	actor.velocity.x += input_axis.x * SPEED
+	actor.velocity.x = clamp(actor.velocity.x, -MAX_SPEED, MAX_SPEED)
 	
 	var vertical_velocity = actor.velocity.normalized().y
 	if vertical_velocity < -0.1:

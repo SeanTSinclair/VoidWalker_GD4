@@ -4,6 +4,8 @@
 
 [resource]
 script = ExtResource("1_vrn83")
-jump_height = 200
-time_to_reach_peak = 0.4
-time_to_descent = 0.5
+friction = 300
+dash_speed = 800.0
+jump_height = 300.0
+time_to_reach_peak = 0.5
+time_to_descent = 0.3
