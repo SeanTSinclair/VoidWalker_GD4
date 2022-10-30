@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://x2mf62njdiom"]
+
+[ext_resource type="Script" path="res://Player/PlayerStats.gd" id="1_vrn83"]
+
+[resource]
+script = ExtResource("1_vrn83")
+jump_height = 200
+time_to_reach_peak = 0.4
+time_to_descent = 0.5
