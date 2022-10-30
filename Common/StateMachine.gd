@@ -8,7 +8,7 @@ func _physics_process(delta):
 	if current_state != null:
 		tick(delta)
 		current_state.state_logic(delta)
-		transition_logic()
+		transition_logic(delta)
 
 func initialize():
 	var children = get_children()
@@ -30,5 +30,5 @@ func set_state(state):
 func tick(delta):
 	pass
 
-func transition_logic():
+func transition_logic(delta):
 	pass

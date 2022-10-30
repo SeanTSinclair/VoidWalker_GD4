@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://cvuuqblck4106"]
+[gd_scene load_steps=40 format=3 uid="uid://cvuuqblck4106"]
 
 [ext_resource type="Texture2D" uid="uid://yoajrl7vte1r" path="res://Player/Sword Master Sprite Sheet 90x37.png" id="1_177ie"]
 [ext_resource type="Script" path="res://Player/player.gd" id="1_lm3lh"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://Player/States/MoveState.gd" id="6_e2k3x"]
 [ext_resource type="Script" path="res://Player/States/InAirState.gd" id="7_0g6sn"]
 [ext_resource type="Script" path="res://Player/States/JumpState.gd" id="8_8k4u7"]
+[ext_resource type="Script" path="res://Player/States/DashState.gd" id="9_oyrlw"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xluji"]
 radius = 5.0
@@ -191,6 +192,8 @@ graph_offset = Vector2(-283, 47)
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_f3fll"]
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_fmb0y"]
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_lm3lh")
 
@@ -242,3 +245,10 @@ state_name = "in_air"
 [node name="Jump" type="Node" parent="StateMachine"]
 script = ExtResource("8_8k4u7")
 state_name = "jump"
+
+[node name="Dash" type="Node" parent="StateMachine"]
+script = ExtResource("9_oyrlw")
+state_name = "dash"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+frames = SubResource("SpriteFrames_fmb0y")

@@ -22,7 +22,7 @@ func tick(delta):
 		
 	dash(delta, input_axis)
 
-func transition_logic():
+func transition_logic(delta):
 	if current_state == states.idle:
 		idle_transitions()
 	elif current_state == states.move:
@@ -31,17 +31,12 @@ func transition_logic():
 		jump_transitions()
 	elif current_state == states.in_air:
 		in_air_transitions()
+	elif current_state == states.dash:
+		dash_transitions()
 	
 	set_state(current_state)
 
 func dash(delta, input_axis):
-	if !has_dashed:
-		if Input.is_action_just_pressed("dash"):
-			player.velocity = input_axis * DASH_SPEED
-			Input.start_joy_vibration(0, 1, .4, 0.2)
-			is_dashing = true
-			has_dashed = true
-			
 	if is_dashing:
 		dash_time += 1
 		if dash_time >= int(0.25 * 1 / delta):
@@ -56,6 +51,8 @@ func idle_transitions():
 		current_state = states.move
 	if Input.is_action_just_pressed("jump") && is_on_floor:
 		current_state = states.jump
+	if Input.is_action_just_pressed("dash") && !is_dashing:
+		current_state = states.dash
 	if !is_on_floor:
 		current_state = states.in_air
 	
@@ -64,6 +61,8 @@ func move_transitions():
 		current_state = states.idle
 	if Input.is_action_just_pressed("jump") && is_on_floor:
 		current_state = states.jump
+	if Input.is_action_just_pressed("dash") && !is_dashing:
+		current_state = states.dash
 	if !is_on_floor:
 		current_state = states.in_air
 	
@@ -71,7 +70,16 @@ func jump_transitions():
 	current_state = states.in_air
 	
 func in_air_transitions():
-	pass
+	if !is_on_floor:
+		current_state = states.idle
+	if Input.is_action_just_pressed("dash") && !is_dashing:
+		current_state = states.dash
+		
+func dash_transitions():
+	if is_on_floor:
+		current_state = states.idle
+	if !is_dashing && !is_on_floor: 
+		current_state = states.in_air
 	
 func set_player_orientation(input_axis):
 	if input_axis.x < 0:
