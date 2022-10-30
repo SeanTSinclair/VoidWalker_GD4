@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=7 format=3 uid="uid://ddau1ws8ln6ae"]
 
 [ext_resource type="PackedScene" uid="uid://cvuuqblck4106" path="res://Player/player.tscn" id="1_eqp0r"]
 [ext_resource type="Texture2D" uid="uid://coki78fcg16hu" path="res://World/Mossy Tileset/Mossy - TileSet.png" id="1_iede8"]

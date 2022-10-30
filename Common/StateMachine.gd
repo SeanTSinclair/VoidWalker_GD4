@@ -1,6 +1,8 @@
 extends Node
 class_name StateMachine
 
+signal state_changed(new_state)
+
 var states = {}
 var current_state = null
 
@@ -26,6 +28,7 @@ func set_state(state):
 		
 	current_state = state
 	current_state.enter_state(owner)
+	emit_signal("state_changed", current_state)
 
 func tick(delta):
 	pass
