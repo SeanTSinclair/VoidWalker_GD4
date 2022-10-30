@@ -13,6 +13,14 @@ func state_logic(delta):
 	input_axis = state_machine.get_input_axis()
 	actor.velocity.x = input_axis.x * SPEED
 	
+	var vertical_velocity = actor.velocity.normalized().y
+	if vertical_velocity < -0.1:
+		actor.set_animation_state("jump_up")
+	elif vertical_velocity > -0.1 && vertical_velocity < 0.1 && !actor.is_on_floor():
+		actor.set_animation_state("jump_apex")
+	elif vertical_velocity > 0.1:
+		actor.set_animation_state("fall")
+	
 	if !state_machine.is_on_floor && !state_machine.is_dashing:
 		actor.velocity.y += get_gravity() * delta
 
