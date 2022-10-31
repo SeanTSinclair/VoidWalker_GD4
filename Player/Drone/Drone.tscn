@@ -1,10 +1,12 @@
-[gd_scene load_steps=16 format=3 uid="uid://4m4xv7ifuc1j"]
+[gd_scene load_steps=18 format=3 uid="uid://4m4xv7ifuc1j"]
 
 [ext_resource type="Script" path="res://Player/Drone/Drone.gd" id="1_omjcm"]
 [ext_resource type="Texture2D" uid="uid://45aenwpumi4w" path="res://Player/Drone/Companion PINK without shadow.png" id="1_w8ihb"]
 [ext_resource type="Script" path="res://Player/Drone/DroneFSM.gd" id="2_owsa6"]
 [ext_resource type="Script" path="res://Player/Drone/States/IdleState.gd" id="3_bp02j"]
 [ext_resource type="Script" path="res://Player/Drone/States/FollowState.gd" id="5_nc7vk"]
+[ext_resource type="Script" path="res://Player/Drone/Weapon.gd" id="6_4l22q"]
+[ext_resource type="PackedScene" uid="uid://deqqe8bdh83to" path="res://Player/Drone/Weapons/Beam.tscn" id="7_t7fw4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0158f"]
 atlas = ExtResource("1_w8ihb")
@@ -56,6 +58,7 @@ radius = 3.0
 
 [node name="Drone" type="CharacterBody2D"]
 scale = Vector2(5, 5)
+collision_layer = 0
 script = ExtResource("1_omjcm")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -78,3 +81,7 @@ state_name = "follow"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -4)
 shape = SubResource("CircleShape2D_1etvu")
+
+[node name="Weapon" type="Node" parent="."]
+script = ExtResource("6_4l22q")
+projectile = ExtResource("7_t7fw4")

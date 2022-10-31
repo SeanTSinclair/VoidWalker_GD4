@@ -7,11 +7,17 @@ extends CharacterBody2D
 @export var vertical_friction : float = 80.0
 
 @onready var animation = $AnimatedSprite2D
+@onready var weapon = $Weapon
 
 func _physics_process(delta):
 	if player == null: return
 	set_vertical_position()
+	if Input.is_action_just_pressed("secondary_attack"):
+		attack()
 	move_and_slide()
+
+func attack():
+	weapon.shoot(position, direction_to_mouse())
 
 func set_vertical_position():
 	var vertical_distance_to_player = player.position.y - position.y
@@ -24,6 +30,9 @@ func set_vertical_position():
 	
 func set_animation_state(state):
 	animation.play(state)
+	
+func direction_to_mouse() -> Vector2:
+	return (get_global_mouse_position() - global_position).normalized()
 	
 func direction_to_player() -> Vector2:
 	if player == null: return Vector2.ZERO

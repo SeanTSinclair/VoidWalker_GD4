@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://deqqe8bdh83to"]
+
+[ext_resource type="Script" path="res://Common/Projectile.gd" id="1_2k7hv"]
+[ext_resource type="Texture2D" uid="uid://c711h7h30m8dj" path="res://Player/Drone/Weapons/Beam.png" id="1_l0umb"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_27kuk"]
+radius = 4.0
+height = 32.0
+
+[node name="Beam" type="Area2D"]
+collision_layer = 0
+collision_mask = 65
+script = ExtResource("1_2k7hv")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_l0umb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = -1.5708
+shape = SubResource("CapsuleShape2D_27kuk")
