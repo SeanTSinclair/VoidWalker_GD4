@@ -9,6 +9,12 @@ var state_machine = null
 func state_logic(delta):
 	pass
 	
+func check_transitions():
+	pass
+	
+func set_state(state):
+	state_machine.set_state(state)
+	
 func enter_state(actor):
 	self.actor = actor
 	

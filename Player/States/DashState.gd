@@ -4,6 +4,8 @@ var dash_time = 0
 var has_dashed : bool = false
 var dash_direction : Vector2 = Vector2.RIGHT
 
+var states = null
+
 func state_logic(delta):
 	if !has_dashed:
 		actor.velocity = state_machine.get_input_axis() * actor.stats.dash_speed
@@ -19,6 +21,18 @@ func state_logic(delta):
 	
 	if actor.is_on_floor && actor.velocity.y >= 0:
 			has_dashed = false
+
+func check_transitions():
+	if states == null:
+		states = state_machine.states
+	var is_on_floor = state_machine.is_on_floor
+	var is_dashing = state_machine.is_dashing
+	
+	if !is_dashing:
+		if is_on_floor:
+			set_state(states.idle)
+		else:
+			set_state(states.in_air)
 
 func enter_state(actor):
 	super.enter_state(actor)

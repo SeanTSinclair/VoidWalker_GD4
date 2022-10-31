@@ -10,6 +10,8 @@ const MAX_SPEED = 500.0
 
 var input_axis = Vector2.ZERO
 
+var states = null
+
 func state_logic(delta):
 	input_axis = state_machine.get_input_axis()
 	actor.velocity.x += input_axis.x * SPEED
@@ -25,6 +27,20 @@ func state_logic(delta):
 	
 	if !state_machine.is_on_floor && !state_machine.is_dashing:
 		actor.velocity.y += get_gravity() * delta
+
+	
+func check_transitions():
+	if states == null:
+		states = state_machine.states
+	var is_on_floor = state_machine.is_on_floor
+	var is_dashing = state_machine.is_dashing
+	
+	if is_on_floor:
+		state_machine.dash_count = 0
+		set_state(states.idle)
+	if Input.is_action_just_pressed("dash") && state_machine.dash_count < actor.stats.max_dashes:
+		state_machine.dash_count += 1
+		set_state(states.dash)
 
 func get_gravity() -> float:
 	return jump_gravity if actor.velocity.y < 0.0 else fall_gravity
