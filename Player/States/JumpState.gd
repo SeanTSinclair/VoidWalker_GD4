@@ -8,4 +8,5 @@ func enter_state(actor):
 	actor.velocity.y = jump_velocity
 
 func check_transitions():
+	super.check_transitions()
 	set_state(state_machine.states.in_air)

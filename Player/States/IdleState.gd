@@ -3,10 +3,12 @@ extends State
 var states = null
 
 func state_logic(delta):
+	super.state_logic(delta)
 	actor.set_animation_state("idle")
 	actor.velocity.x = move_toward(actor.velocity.x, 0, actor.stats.friction)
 
 func check_transitions():
+	super.check_transitions()
 	if states == null:
 		states = state_machine.states
 	var is_on_floor = state_machine.is_on_floor
@@ -20,3 +22,5 @@ func check_transitions():
 		set_state(states.dash)
 	if !is_on_floor:
 		set_state(states.in_air)
+	if Input.is_action_just_pressed("primary_attack"):
+		set_state(states.attack)

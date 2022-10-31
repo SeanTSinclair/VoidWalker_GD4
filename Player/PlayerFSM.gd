@@ -24,6 +24,9 @@ func set_player_orientation(input_axis):
 		player.set_flipped(true)
 	elif input_axis.x > 0:
 		player.set_flipped(false)
+		
+func facing_direction() -> Vector2:
+	return Vector2.LEFT if player.sprite.flip_h else Vector2.RIGHT
 
 func get_input_axis() -> Vector2:
 	var input_axis = Vector2.ZERO

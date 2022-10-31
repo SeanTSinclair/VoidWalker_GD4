@@ -7,6 +7,7 @@ var dash_direction : Vector2 = Vector2.RIGHT
 var states = null
 
 func state_logic(delta):
+	super.state_logic(delta)
 	if !has_dashed:
 		actor.velocity = state_machine.get_input_axis() * actor.stats.dash_speed
 		Input.start_joy_vibration(0, 1, .4, 0.2)
@@ -23,6 +24,7 @@ func state_logic(delta):
 			has_dashed = false
 
 func check_transitions():
+	super.check_transitions()
 	if states == null:
 		states = state_machine.states
 	var is_on_floor = state_machine.is_on_floor
