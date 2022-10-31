@@ -1,0 +1,63 @@
+[gd_scene load_steps=13 format=3 uid="uid://c8dqlkpmuobqb"]
+
+[ext_resource type="Texture2D" uid="uid://npnmr3u5lgid" path="res://World/Portal/Portal_Sheet.png" id="2_xjqdh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pxss8"]
+atlas = ExtResource("2_xjqdh")
+region = Rect2(0, 0, 28, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ptwpj"]
+atlas = ExtResource("2_xjqdh")
+region = Rect2(28, 0, 28, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_roxl7"]
+atlas = ExtResource("2_xjqdh")
+region = Rect2(56, 0, 28, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j2oo8"]
+atlas = ExtResource("2_xjqdh")
+region = Rect2(84, 0, 28, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fnl8b"]
+atlas = ExtResource("2_xjqdh")
+region = Rect2(112, 0, 28, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y8jqg"]
+atlas = ExtResource("2_xjqdh")
+region = Rect2(140, 0, 28, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t5272"]
+atlas = ExtResource("2_xjqdh")
+region = Rect2(168, 0, 28, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7s6g0"]
+atlas = ExtResource("2_xjqdh")
+region = Rect2(196, 0, 28, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ai71g"]
+atlas = ExtResource("2_xjqdh")
+region = Rect2(224, 0, 28, 41)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_26vdd"]
+animations = [{
+"frames": [SubResource("AtlasTexture_pxss8"), SubResource("AtlasTexture_ptwpj"), SubResource("AtlasTexture_roxl7"), SubResource("AtlasTexture_j2oo8"), SubResource("AtlasTexture_fnl8b"), SubResource("AtlasTexture_y8jqg"), SubResource("AtlasTexture_t5272"), SubResource("AtlasTexture_7s6g0"), SubResource("AtlasTexture_ai71g")],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sbela"]
+size = Vector2(21, 20)
+
+[node name="StartPortal" type="Area2D"]
+scale = Vector2(2.5, 2.5)
+collision_layer = 0
+collision_mask = 2
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+frames = SubResource("SpriteFrames_26vdd")
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 10)
+shape = SubResource("RectangleShape2D_sbela")

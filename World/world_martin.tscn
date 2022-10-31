@@ -1,6 +1,6 @@
-[gd_scene load_steps=12 format=3 uid="uid://bjjm0x0qtlaon"]
+[gd_scene load_steps=12 format=3]
 
-[ext_resource type="PackedScene" uid="uid://cvuuqblck4106" path="res://Player/player.tscn" id="1_eqp0r"]
+[ext_resource type="PackedScene" uid="uid://d3eybhhghmlho" path="res://Player/Player.tscn" id="1_eqp0r"]
 [ext_resource type="Texture2D" uid="uid://coki78fcg16hu" path="res://World/Mossy Tileset/Mossy - TileSet.png" id="1_iede8"]
 [ext_resource type="Texture2D" uid="uid://cw1ili315d67a" path="res://Cat Sprite Sheet.png" id="3_w4knr"]
 

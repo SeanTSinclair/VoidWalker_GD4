@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dbmf405cmeo58"]
+
+[ext_resource type="Script" path="res://World/Portal/Portal.gd" id="1_hws6t"]
+[ext_resource type="PackedScene" uid="uid://c8dqlkpmuobqb" path="res://World/Portal/Portal.tscn" id="2_ou3hl"]
+
+[node name="Portals" type="Node2D"]
+script = ExtResource("1_hws6t")
+
+[node name="StartPortal" parent="." instance=ExtResource("2_ou3hl")]
+
+[node name="EndPortal" parent="." instance=ExtResource("2_ou3hl")]
+position = Vector2(34, 0)
+
+[connection signal="body_entered" from="StartPortal" to="." method="_on_start_portal_body_entered"]
+[connection signal="body_entered" from="EndPortal" to="." method="_on_end_portal_body_entered"]
