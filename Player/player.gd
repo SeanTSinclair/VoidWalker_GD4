@@ -1,7 +1,6 @@
 extends CharacterBody2D
 
 @onready var stats = preload("res://Player/PlayerStats.tres")
-@onready var state_machine = $StateMachine
 @onready var animation_manager = $AnimationManager
 @onready var sprite = $Sprite2D
 

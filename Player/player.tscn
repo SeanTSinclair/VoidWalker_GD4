@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://cvuuqblck4106"]
+[gd_scene load_steps=44 format=3 uid="uid://cvuuqblck4106"]
 
 [ext_resource type="Texture2D" uid="uid://yoajrl7vte1r" path="res://Player/Sword Master Sprite Sheet 90x37.png" id="1_177ie"]
 [ext_resource type="Script" path="res://Player/player.gd" id="1_lm3lh"]
@@ -114,13 +114,47 @@ tracks/0/keys = {
 "values": [20, 21, 22, 23, 24, 25, 26, 27]
 }
 
+[sub_resource type="Animation" id="Animation_3acxc"]
+resource_name = "run"
+length = 0.9
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [30, 31, 31, 32, 33, 34, 35, 36, 37]
+}
+
+[sub_resource type="Animation" id="Animation_wit55"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [31]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xtf2d"]
 _data = {
+"RESET": SubResource("Animation_wit55"),
 "dash": SubResource("Animation_44u5p"),
 "fall": SubResource("Animation_ennyo"),
 "idle": SubResource("Animation_qf7qq"),
 "jump_apex": SubResource("Animation_1r4dr"),
 "jump_up": SubResource("Animation_uvvlp"),
+"run": SubResource("Animation_3acxc"),
 "walk": SubResource("Animation_say2f")
 }
 
@@ -138,6 +172,9 @@ animation = &"jump_apex"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_mcinn"]
 animation = &"jump_up"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5h17o"]
+animation = &"run"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_oa6hl"]
 animation = &"walk"
@@ -172,6 +209,10 @@ auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_spt2o"]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ly2og"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1wlfo"]
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_vfh3e"]
 states/End/position = Vector2(626, 100)
 states/Start/position = Vector2(168, 100)
@@ -185,14 +226,14 @@ states/jump_apex/node = SubResource("AnimationNodeAnimation_iwb0m")
 states/jump_apex/position = Vector2(312, 239)
 states/jump_up/node = SubResource("AnimationNodeAnimation_mcinn")
 states/jump_up/position = Vector2(312, 173)
+states/run/node = SubResource("AnimationNodeAnimation_5h17o")
+states/run/position = Vector2(420, 26)
 states/walk/node = SubResource("AnimationNodeAnimation_oa6hl")
 states/walk/position = Vector2(419, 100)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_vti2j"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_nksr6"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_c5cm4"), "idle", "jump_up", SubResource("AnimationNodeStateMachineTransition_4iik6"), "jump_up", "jump_apex", SubResource("AnimationNodeStateMachineTransition_sylrq"), "jump_apex", "fall", SubResource("AnimationNodeStateMachineTransition_8sa60"), "fall", "idle", SubResource("AnimationNodeStateMachineTransition_8f88y"), "idle", "fall", SubResource("AnimationNodeStateMachineTransition_fse5w"), "idle", "dash", SubResource("AnimationNodeStateMachineTransition_xmqye"), "dash", "idle", SubResource("AnimationNodeStateMachineTransition_3jx1a"), "fall", "dash", SubResource("AnimationNodeStateMachineTransition_5iatr"), "jump_up", "dash", SubResource("AnimationNodeStateMachineTransition_pqyrq"), "dash", "fall", SubResource("AnimationNodeStateMachineTransition_spt2o")]
-graph_offset = Vector2(-283, 47)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_vti2j"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_nksr6"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_c5cm4"), "idle", "jump_up", SubResource("AnimationNodeStateMachineTransition_4iik6"), "jump_up", "jump_apex", SubResource("AnimationNodeStateMachineTransition_sylrq"), "jump_apex", "fall", SubResource("AnimationNodeStateMachineTransition_8sa60"), "fall", "idle", SubResource("AnimationNodeStateMachineTransition_8f88y"), "idle", "fall", SubResource("AnimationNodeStateMachineTransition_fse5w"), "idle", "dash", SubResource("AnimationNodeStateMachineTransition_xmqye"), "dash", "idle", SubResource("AnimationNodeStateMachineTransition_3jx1a"), "fall", "dash", SubResource("AnimationNodeStateMachineTransition_5iatr"), "jump_up", "dash", SubResource("AnimationNodeStateMachineTransition_pqyrq"), "dash", "fall", SubResource("AnimationNodeStateMachineTransition_spt2o"), "walk", "run", SubResource("AnimationNodeStateMachineTransition_ly2og"), "run", "walk", SubResource("AnimationNodeStateMachineTransition_1wlfo")]
+graph_offset = Vector2(-231, -31)
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_f3fll"]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_fmb0y"]
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_lm3lh")
@@ -209,7 +250,7 @@ texture = ExtResource("1_177ie")
 offset = Vector2(17, 0)
 hframes = 10
 vframes = 27
-frame = 10
+frame = 31
 
 [node name="AnimationManager" type="Node" parent="."]
 script = ExtResource("3_crsvb")
@@ -249,6 +290,3 @@ state_name = "jump"
 [node name="Dash" type="Node" parent="StateMachine"]
 script = ExtResource("9_oyrlw")
 state_name = "dash"
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-frames = SubResource("SpriteFrames_fmb0y")

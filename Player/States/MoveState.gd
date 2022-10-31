@@ -1,20 +1,25 @@
 extends State
 
-const SPEED = 300.0
-
 var input_axis = Vector2.ZERO
 
 var states = null
+var move_speed = 0
 
 func enter_state(actor):
 	super.enter_state(actor)
-	actor.set_animation_state("walk")
+	move_speed = actor.stats.move_speed
 
 func state_logic(delta):
+	if Input.is_action_pressed("run"): 
+		actor.set_animation_state("run")
+		move_speed = actor.stats.run_speed
+	else:
+		actor.set_animation_state("walk")
+		actor.stats.move_speed
 	input_axis = state_machine.get_input_axis()
 	if input_axis.x > 0: input_axis.x = 1
 	elif input_axis.x < 0: input_axis.x = -1
-	actor.velocity.x = input_axis.x * SPEED
+	actor.velocity.x = input_axis.x * move_speed
 
 func check_transitions():
 	if states == null:
