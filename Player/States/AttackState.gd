@@ -25,7 +25,7 @@ func _physics_process(delta):
 	
 	if actor != null:
 		if !state_machine.is_on_floor:
-			actor.velocity.y += get_gravity() * delta
+			actor.apply_gravity(delta)
 		else: 
 			actor.velocity = actor.velocity.move_toward(Vector2.ZERO, stats.friction)
 

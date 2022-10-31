@@ -1,0 +1,80 @@
+[gd_scene load_steps=16 format=3 uid="uid://4m4xv7ifuc1j"]
+
+[ext_resource type="Script" path="res://Player/Drone/Drone.gd" id="1_omjcm"]
+[ext_resource type="Texture2D" uid="uid://45aenwpumi4w" path="res://Player/Drone/Companion PINK without shadow.png" id="1_w8ihb"]
+[ext_resource type="Script" path="res://Player/Drone/DroneFSM.gd" id="2_owsa6"]
+[ext_resource type="Script" path="res://Player/Drone/States/IdleState.gd" id="3_bp02j"]
+[ext_resource type="Script" path="res://Player/Drone/States/FollowState.gd" id="5_nc7vk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0158f"]
+atlas = ExtResource("1_w8ihb")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ufece"]
+atlas = ExtResource("1_w8ihb")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_reivw"]
+atlas = ExtResource("1_w8ihb")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jdpfj"]
+atlas = ExtResource("1_w8ihb")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wuic4"]
+atlas = ExtResource("1_w8ihb")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tlk1j"]
+atlas = ExtResource("1_w8ihb")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qswun"]
+atlas = ExtResource("1_w8ihb")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oelgc"]
+atlas = ExtResource("1_w8ihb")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_41jrd"]
+animations = [{
+"frames": [SubResource("AtlasTexture_0158f"), SubResource("AtlasTexture_ufece"), SubResource("AtlasTexture_reivw"), SubResource("AtlasTexture_jdpfj")],
+"loop": true,
+"name": &"following",
+"speed": 5.0
+}, {
+"frames": [SubResource("AtlasTexture_wuic4"), SubResource("AtlasTexture_tlk1j"), SubResource("AtlasTexture_qswun"), SubResource("AtlasTexture_oelgc")],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1etvu"]
+radius = 3.0
+
+[node name="Drone" type="CharacterBody2D"]
+scale = Vector2(5, 5)
+script = ExtResource("1_omjcm")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+frames = SubResource("SpriteFrames_41jrd")
+animation = &"idle"
+playing = true
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("2_owsa6")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("3_bp02j")
+state_name = "idle"
+
+[node name="Follow" type="Node" parent="StateMachine"]
+script = ExtResource("5_nc7vk")
+state_name = "follow"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -4)
+shape = SubResource("CircleShape2D_1etvu")

@@ -3,11 +3,6 @@ extends State
 const SPEED = 300.0
 const MAX_SPEED = 500.0
 
-@onready var stats : PlayerStats = preload("res://Player/PlayerStats.tres")
-
-@onready var jump_gravity : float = ((-2.0 * stats.jump_height) / (stats.time_to_reach_peak * stats.time_to_reach_peak)) * -1.0
-@onready var fall_gravity : float = ((-2.0 * stats.jump_height) / (stats.time_to_reach_peak * stats.time_to_reach_peak)) * -1.0
-
 var input_axis = Vector2.ZERO
 
 var states = null
@@ -27,7 +22,7 @@ func state_logic(delta):
 		actor.set_animation_state("fall")
 	
 	if !state_machine.is_on_floor && !state_machine.is_dashing:
-		actor.velocity.y += get_gravity() * delta
+		actor.apply_gravity(delta)
 
 	
 func check_transitions():
@@ -46,5 +41,4 @@ func check_transitions():
 	if Input.is_action_just_pressed("primary_attack"):
 		set_state(states.attack)
 
-func get_gravity() -> float:
-	return jump_gravity if actor.velocity.y < 0.0 else fall_gravity
+
