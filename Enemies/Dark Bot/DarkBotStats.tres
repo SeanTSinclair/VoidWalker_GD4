@@ -1,0 +1,8 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://dmcrevkivtrap"]
+
+[ext_resource type="Script" path="res://Enemies/Common/BaseEnemyStats.gd" id="1_7i6wu"]
+
+[resource]
+script = ExtResource("1_7i6wu")
+friction = 300.0
+move_speed = 80.0

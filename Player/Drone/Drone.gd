@@ -8,6 +8,7 @@ extends CharacterBody2D
 
 @onready var animation = $AnimatedSprite2D
 @onready var weapon = $Weapon
+@onready var projectile_spawn = $ProjectileSpawnPosition
 
 func _physics_process(delta):
 	if player == null: return
@@ -17,7 +18,7 @@ func _physics_process(delta):
 	move_and_slide()
 
 func attack():
-	weapon.shoot(position, direction_to_mouse())
+	weapon.shoot(projectile_spawn.global_position, direction_to_mouse())
 
 func set_vertical_position():
 	var vertical_distance_to_player = player.position.y - position.y

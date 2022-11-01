@@ -85,3 +85,6 @@ shape = SubResource("CircleShape2D_1etvu")
 [node name="Weapon" type="Node" parent="."]
 script = ExtResource("6_4l22q")
 projectile = ExtResource("7_t7fw4")
+
+[node name="ProjectileSpawnPosition" type="Node2D" parent="."]
+position = Vector2(0, -4)

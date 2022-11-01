@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Texture2D" uid="uid://cddi4l76o3pu8" path="res://Enemies/Shock Sweeper/spritesheet.png" id="1_mlwfl"]
+
+[node name="ShockSweeper" type="Area2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_mlwfl")
+hframes = 10
+vframes = 9

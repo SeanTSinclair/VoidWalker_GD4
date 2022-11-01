@@ -8,9 +8,11 @@ radius = 4.0
 height = 32.0
 
 [node name="Beam" type="Area2D"]
+scale = Vector2(0.5, 0.5)
 collision_layer = 0
 collision_mask = 65
 script = ExtResource("1_2k7hv")
+speed = 700.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -19,3 +21,5 @@ texture = ExtResource("1_l0umb")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = -1.5708
 shape = SubResource("CapsuleShape2D_27kuk")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

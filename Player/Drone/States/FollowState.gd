@@ -5,7 +5,7 @@ var stopping_distance = 100
 
 func enter_state(actor):
 	super.enter_state(actor)
-	actor.set_animation_state("idle")
+	actor.set_animation_state("following")
 
 func state_logic(delta):
 	super.state_logic(delta)

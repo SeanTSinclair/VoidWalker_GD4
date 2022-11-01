@@ -9,10 +9,20 @@
 config_version=5
 
 _global_script_classes=[{
+"base": "Resource",
+"class": &"BaseEnemyStats",
+"language": &"GDScript",
+"path": "res://Enemies/Common/BaseEnemyStats.gd"
+}, {
 "base": "Node",
 "class": &"DroneWeapon",
 "language": &"GDScript",
 "path": "res://Player/Drone/Weapon.gd"
+}, {
+"base": "StateMachine",
+"class": &"EnemyFSM",
+"language": &"GDScript",
+"path": "res://Enemies/Dark Bot/EnemyFSM.gd"
 }, {
 "base": "Resource",
 "class": &"PlayerStats",
@@ -35,7 +45,9 @@ _global_script_classes=[{
 "path": "res://Common/StateMachine.gd"
 }]
 _global_script_class_icons={
+"BaseEnemyStats": "",
 "DroneWeapon": "",
+"EnemyFSM": "",
 "PlayerStats": "",
 "Projectile": "",
 "State": "",
