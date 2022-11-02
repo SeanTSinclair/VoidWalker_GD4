@@ -5,6 +5,7 @@ signal state_changed(new_state)
 
 var states = {}
 var current_state = null
+var previous_state = null
 
 func _physics_process(delta):
 	if current_state != null:
@@ -21,10 +22,10 @@ func initialize():
 	print("State machine for %s initialized with states: %s" % [owner.name, states.keys()])
 	
 
-func set_state(state):
+func set_state(old_state, new_state):
 	if current_state != null:
 		current_state.exit_state()
-		
-	current_state = state
+	previous_state = old_state
+	current_state = new_state
 	current_state.enter_state(owner)
 	emit_signal("state_changed", current_state)

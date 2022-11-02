@@ -405,6 +405,12 @@ state_name = "move"
 script = ExtResource("7_0g6sn")
 state_name = "in_air"
 
+[node name="CoyoteTimer" type="Timer" parent="StateMachine/InAir"]
+one_shot = true
+
+[node name="JumpBufferTimer" type="Timer" parent="StateMachine/InAir"]
+one_shot = true
+
 [node name="Jump" type="Node" parent="StateMachine"]
 script = ExtResource("8_8k4u7")
 state_name = "jump"

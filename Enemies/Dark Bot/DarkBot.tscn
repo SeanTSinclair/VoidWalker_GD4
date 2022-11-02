@@ -203,6 +203,7 @@ transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition
 
 [node name="DarkBot" type="CharacterBody2D"]
 scale = Vector2(4, 4)
+collision_layer = 4
 script = ExtResource("1_3javn")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

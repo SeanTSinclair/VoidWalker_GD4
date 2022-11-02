@@ -1,14 +1,20 @@
 extends StateMachine
 
+const JUMP_BUFFER : float = 0.2
+const COYOTE_TIME : float = 0.2
+
 @onready var player = owner
+@onready var coyote_timer = $CoyoteTimer
+@onready var jump_buffer_timer = $JumpBufferTimer
 
 var is_dashing : bool = false
 var dash_count : int = 0
 var is_on_floor : bool = false
+var can_jump : bool = true
 
 func _ready():
 	initialize()
-	set_state(states.idle)
+	set_state(states.idle, states.idle)
 	
 func _physics_process(delta):
 	super._physics_process(delta)
@@ -17,7 +23,6 @@ func _physics_process(delta):
 	is_on_floor = player.is_on_floor()
 	
 	set_player_orientation(input_axis)
-
 	
 func set_player_orientation(input_axis):
 	if input_axis.x < 0:

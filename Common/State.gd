@@ -15,7 +15,7 @@ func check_transitions():
 		return
 	
 func set_state(state):
-	state_machine.set_state(state)
+	state_machine.set_state(self, state)
 	
 func enter_state(actor):
 	self.actor = actor
