@@ -9,6 +9,11 @@
 config_version=5
 
 _global_script_classes=[{
+"base": "Node",
+"class": &"Attack",
+"language": &"GDScript",
+"path": "res://Enemies/Common/Attack.gd"
+}, {
 "base": "Resource",
 "class": &"BaseEnemyStats",
 "language": &"GDScript",
@@ -45,6 +50,7 @@ _global_script_classes=[{
 "path": "res://Common/StateMachine.gd"
 }]
 _global_script_class_icons={
+"Attack": "",
 "BaseEnemyStats": "",
 "DroneWeapon": "",
 "EnemyFSM": "",

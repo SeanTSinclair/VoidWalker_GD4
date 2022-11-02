@@ -7,9 +7,11 @@ extends CharacterBody2D
 @onready var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var start_position : Vector2 = position
 
+var facing_direction : Vector2 = Vector2.RIGHT
+
 func _physics_process(delta):
 	move_and_slide()
-	set_facing_direction()
+	update_facing_direction()
 
 func apply_gravity(delta):
 	velocity.y += gravity * delta
@@ -17,16 +19,32 @@ func apply_gravity(delta):
 func move_towards_point(point, speed):
 	velocity.x = direction_to(point).x * speed
 	
-func set_facing_direction():
+func update_facing_direction():
 	if velocity.x < 0:
+		facing_direction = Vector2.LEFT
 		sprite.flip_h = true
 		sprite.offset = Vector2(-53, 0)
 	elif velocity.x > 0:
+		facing_direction = Vector2.RIGHT
 		sprite.flip_h = false
 		sprite.offset = Vector2(0, 0)
+		
+func set_facing_direction(direction):
+	if direction == Vector2.LEFT:
+		facing_direction = Vector2.LEFT
+		sprite.flip_h = true
+		sprite.offset = Vector2(-53, 0)
+	elif direction == Vector2.RIGHT: 
+		facing_direction = Vector2.RIGHT
+		sprite.flip_h = false
+		sprite.offset = Vector2(0, 0)
+		
 	
 func direction_to(target) -> Vector2:
 	return (target - global_position).normalized()
+	
+func distance_to(target) -> float:
+	return global_position.distance_to(target)
 	
 func set_animation_state(state):
 	state_machine.travel(state)

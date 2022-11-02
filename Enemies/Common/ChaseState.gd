@@ -5,6 +5,7 @@ const COMBAT_RANGE : float = 150.0
 
 func enter_state(actor):
 	super.enter_state(actor)
+	actor.set_animation_state("run")
 	
 func exit_state():
 	super.exit_state()
@@ -20,5 +21,5 @@ func check_transitions():
 	if state_machine.target == null:
 		set_state(state_machine.states.wander)
 	elif actor.position.distance_to(state_machine.target.global_position) < COMBAT_RANGE:
-		set_state(state_machine.states.idle) # Combat
+		set_state(state_machine.states.combat)
 	

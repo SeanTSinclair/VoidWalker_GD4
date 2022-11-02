@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://c4fcfydypcid3"]
+[gd_scene load_steps=39 format=3 uid="uid://c4fcfydypcid3"]
 
 [ext_resource type="Script" path="res://Enemies/Dark Bot/DarkBot.gd" id="1_3javn"]
 [ext_resource type="Texture2D" uid="uid://dctuqtyep3sqg" path="res://Enemies/Dark Bot/spritesheet.png" id="2_sooyw"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://Enemies/Common/IdleState.gd" id="4_i2bc8"]
 [ext_resource type="Script" path="res://Enemies/Common/WanderState.gd" id="5_e3xmk"]
 [ext_resource type="Script" path="res://Enemies/Common/ChaseState.gd" id="6_klq5s"]
+[ext_resource type="Script" path="res://Enemies/Dark Bot/DarkBotCombatState.gd" id="7_pq407"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fcsqb"]
 radius = 8.0
@@ -199,8 +200,19 @@ states/run/position = Vector2(331, 171)
 states/shoot/node = SubResource("AnimationNodeAnimation_n4vcb")
 states/shoot/position = Vector2(448, 13)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_fi6kw"), "idle", "attack", SubResource("AnimationNodeStateMachineTransition_451gb"), "attack", "idle", SubResource("AnimationNodeStateMachineTransition_rdnbj"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_nohex"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_04cae"), "idle", "hit", SubResource("AnimationNodeStateMachineTransition_33grq"), "hit", "idle", SubResource("AnimationNodeStateMachineTransition_jhy0v"), "idle", "shoot", SubResource("AnimationNodeStateMachineTransition_pv736"), "shoot", "idle", SubResource("AnimationNodeStateMachineTransition_lhqsl"), "hit", "death", SubResource("AnimationNodeStateMachineTransition_f4xjr"), "death", "hit", SubResource("AnimationNodeStateMachineTransition_v2nbi"), "death", "End", SubResource("AnimationNodeStateMachineTransition_o0cnw")]
+graph_offset = Vector2(-127, -22)
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_2nfoi"]
+
+[sub_resource type="GDScript" id="GDScript_ujsss"]
+script/source = "extends Attack
+
+func _ready():
+	ranged = true
+
+func attack(performed_by):
+	performed_by.set_animation_state(\"shoot\")
+"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4vgwu"]
 radius = 126.004
@@ -231,6 +243,7 @@ libraries = {
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_lqrlk")
 anim_player = NodePath("../AnimationPlayer")
+advance_expression_base_node = NodePath("")
 active = true
 parameters/playback = SubResource("AnimationNodeStateMachinePlayback_2nfoi")
 
@@ -253,6 +266,16 @@ state_name = "wander"
 script = ExtResource("6_klq5s")
 state_name = "chase"
 
+[node name="Combat" type="Node" parent="StateMachine"]
+script = ExtResource("7_pq407")
+state_name = "combat"
+
+[node name="Gun" type="Node" parent="StateMachine/Combat"]
+script = SubResource("GDScript_ujsss")
+
+[node name="CombatDecisionTimer" type="Timer" parent="StateMachine/Combat"]
+autostart = true
+
 [node name="WanderTimer" type="Timer" parent="StateMachine"]
 autostart = true
 
@@ -263,6 +286,7 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
 shape = SubResource("CircleShape2D_4vgwu")
 
+[connection signal="timeout" from="StateMachine/Combat/CombatDecisionTimer" to="StateMachine/Combat" method="_on_combat_decision_timer_timeout"]
 [connection signal="timeout" from="StateMachine/WanderTimer" to="StateMachine" method="_on_wander_timer_timeout"]
 [connection signal="body_entered" from="DetectionArea" to="StateMachine" method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="DetectionArea" to="StateMachine" method="_on_detection_area_body_exited"]
