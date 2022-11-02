@@ -10,5 +10,5 @@ friction = 300.0
 dash_speed = 800.0
 max_dashes = 3
 jump_height = 300.0
-time_to_reach_peak = 0.5
-time_to_descent = 0.3
+time_to_reach_peak = 0.4
+time_to_descent = 0.2

@@ -210,6 +210,8 @@ script = ExtResource("1_3javn")
 texture_filter = 1
 position = Vector2(27, 0)
 texture = ExtResource("2_sooyw")
+offset = Vector2(-53, 0)
+flip_h = true
 hframes = 39
 frame = 1
 
