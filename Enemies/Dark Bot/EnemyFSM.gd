@@ -14,3 +14,9 @@ func _ready():
 func _on_wander_timer_timeout():
 	wander_timer.start(randf_range(1.0,4.0))
 	is_wandering = randi_range(0, 10) > 5
+
+func _on_detection_area_body_entered(body):
+	target = body
+
+func _on_detection_area_body_exited(body):
+	target = null 

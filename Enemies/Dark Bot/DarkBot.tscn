@@ -1,10 +1,11 @@
-[gd_scene load_steps=35 format=3 uid="uid://c4fcfydypcid3"]
+[gd_scene load_steps=37 format=3 uid="uid://c4fcfydypcid3"]
 
 [ext_resource type="Script" path="res://Enemies/Dark Bot/DarkBot.gd" id="1_3javn"]
 [ext_resource type="Texture2D" uid="uid://dctuqtyep3sqg" path="res://Enemies/Dark Bot/spritesheet.png" id="2_sooyw"]
 [ext_resource type="Script" path="res://Enemies/Dark Bot/EnemyFSM.gd" id="3_xf84d"]
 [ext_resource type="Script" path="res://Enemies/Common/IdleState.gd" id="4_i2bc8"]
 [ext_resource type="Script" path="res://Enemies/Common/WanderState.gd" id="5_e3xmk"]
+[ext_resource type="Script" path="res://Enemies/Common/ChaseState.gd" id="6_klq5s"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fcsqb"]
 radius = 8.0
@@ -201,6 +202,9 @@ transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_2nfoi"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_4vgwu"]
+radius = 126.004
+
 [node name="DarkBot" type="CharacterBody2D"]
 scale = Vector2(4, 4)
 collision_layer = 4
@@ -245,7 +249,20 @@ state_name = "wander"
 
 [node name="WanderPosB" type="Node2D" parent="StateMachine/Wander"]
 
+[node name="ChaseState" type="Node" parent="StateMachine"]
+script = ExtResource("6_klq5s")
+state_name = "chase"
+
 [node name="WanderTimer" type="Timer" parent="StateMachine"]
 autostart = true
 
+[node name="DetectionArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+shape = SubResource("CircleShape2D_4vgwu")
+
 [connection signal="timeout" from="StateMachine/WanderTimer" to="StateMachine" method="_on_wander_timer_timeout"]
+[connection signal="body_entered" from="DetectionArea" to="StateMachine" method="_on_detection_area_body_entered"]
+[connection signal="body_exited" from="DetectionArea" to="StateMachine" method="_on_detection_area_body_exited"]

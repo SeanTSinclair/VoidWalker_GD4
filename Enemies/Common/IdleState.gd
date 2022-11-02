@@ -17,4 +17,6 @@ func check_transitions():
 	super.check_transitions()
 	if state_machine.is_wandering:
 		set_state(state_machine.states.wander)
+	if state_machine.target != null:
+		set_state(state_machine.states.chase)
 	

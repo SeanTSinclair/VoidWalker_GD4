@@ -5,7 +5,7 @@ extends State
 
 @onready var wander_targets : Array[Vector2] = []
 
-var target = null
+var wander_target = null
 var stopping_distance = 35
 
 func _ready():
@@ -18,25 +18,24 @@ func enter_state(actor):
 	super.enter_state(actor)
 	actor.set_animation_state("run")
 	wander_targets.shuffle()
-	target = wander_targets[0]
-	if actor.direction_to(target).x > 0:
-		actor.set_facing_direction(Vector2.RIGHT)
-	else:
-		actor.set_facing_direction(Vector2.LEFT)
+	wander_target = wander_targets[0]
 	
 func exit_state():
 	super.exit_state()
-	target = null
+	wander_target = null
 
 func state_logic(delta):
 	super.state_logic(delta)
-	actor.velocity.x = actor.direction_to(target).x * actor.stats.move_speed
+	actor.velocity.x = actor.direction_to(wander_target).x * actor.stats.move_speed
 	
 func check_transitions():
 	super.check_transitions()
 	
-	if actor.global_position.distance_to(target) <= stopping_distance:
+	if actor.global_position.distance_to(wander_target) <= stopping_distance:
 		if state_machine.is_wandering:
 			set_state(state_machine.states.wander)
 		else:
 			set_state(state_machine.states.idle)
+	
+	if state_machine.target != null:
+		set_state(state_machine.states.chase)
