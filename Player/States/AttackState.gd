@@ -13,6 +13,8 @@ var max_attacks_in_sequence : int
 var attack_ended : bool = true
 var next_attack_queued : bool = false
 
+var dash_queued : bool = false
+
 var attacks : Array = []
 
 func _physics_process(delta):
@@ -44,10 +46,15 @@ func check_transitions():
 	if Input.is_action_just_pressed("primary_attack") && attack_sequence < max_attacks_in_sequence:
 		queue_next_attack()
 	
-	if attack_ended && !next_attack_queued:
-		set_state(states.idle)
+	if Input.is_action_just_pressed("dash"):
+		dash_queued = true
+		get_tree().create_timer(.1).connect("timeout", Callable(self, "reset_dash_timer"))
 	
-	# Secondary attack
+	if attack_ended && !next_attack_queued:
+		if dash_queued:
+			set_state(states.dash)
+		else: 
+			set_state(states.idle)
 
 
 func enter_state(actor):
@@ -62,6 +69,9 @@ func exit_state():
 	attack_ended = true
 	next_attack_queued = false
 	attack_sequence = 0
+	
+func reset_dash_timer():
+	dash_queued = false
 	
 func get_gravity() -> float:
 	return jump_gravity if actor.velocity.y < 0.0 else fall_gravity

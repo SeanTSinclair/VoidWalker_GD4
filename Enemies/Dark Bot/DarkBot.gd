@@ -30,16 +30,18 @@ func update_facing_direction():
 		sprite.offset = Vector2(0, 0)
 		
 func set_facing_direction(direction):
-	if direction == Vector2.LEFT:
+	if direction.x < 0: 
 		facing_direction = Vector2.LEFT
 		sprite.flip_h = true
 		sprite.offset = Vector2(-53, 0)
-	elif direction == Vector2.RIGHT: 
+	else: 
 		facing_direction = Vector2.RIGHT
 		sprite.flip_h = false
 		sprite.offset = Vector2(0, 0)
 		
-	
+func slow_to_stop():
+	velocity.x = move_toward(velocity.x, 0, stats.friction)
+		
 func direction_to(target) -> Vector2:
 	return (target - global_position).normalized()
 	

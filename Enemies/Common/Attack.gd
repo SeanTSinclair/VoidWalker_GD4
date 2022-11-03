@@ -1,12 +1,11 @@
 extends Node
 class_name Attack
 
-signal finished
+signal attacking(animation, duration)
 
-var ranged : bool = false
+@export var attack_duration = 2.0
+@export var ranged : bool = false
+@export var animation_name : String
 
-func attack(performed_by):
-	pass
-	
-func attack_finished():
-	emit_signal("finished")
+func attack():
+	emit_signal("attacking", animation_name, attack_duration)
