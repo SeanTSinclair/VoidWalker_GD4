@@ -6,6 +6,7 @@ const COMBAT_RANGE : float = 150.0
 func enter_state(actor):
 	super.enter_state(actor)
 	actor.set_animation_state("run")
+	actor.indicate_alert()
 	
 func exit_state():
 	super.exit_state()

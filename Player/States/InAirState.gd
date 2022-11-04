@@ -48,10 +48,10 @@ func check_transitions():
 			set_state(states.idle)
 		else: 
 			set_state(states.jump)
-	if Input.is_action_just_pressed("dash") && state_machine.dash_count < actor.stats.max_dashes:
+	elif Input.is_action_just_pressed("dash") && state_machine.dash_count < actor.stats.max_dashes:
 		state_machine.dash_count += 1
 		set_state(states.dash)
-	if Input.is_action_just_pressed("primary_attack"):
+	elif Input.is_action_just_pressed("primary_attack"):
 		set_state(states.attack)
-	if Input.is_action_just_pressed("jump") && coyote_timer.time_left != 0:
+	elif Input.is_action_just_pressed("jump") && coyote_timer.time_left != 0:
 		set_state(states.jump)

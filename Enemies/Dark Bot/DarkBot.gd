@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+@export var health : int = 3
+
 @onready var sprite = $Sprite2D
 @onready var stats = preload("res://Enemies/Dark Bot/DarkBotStats.tres")
 @onready var animation_tree = $AnimationTree
@@ -8,6 +10,7 @@ extends CharacterBody2D
 @onready var start_position : Vector2 = position
 @onready var line_of_sight_ray : RayCast2D= $VisionCast
 @onready var target_ray : RayCast2D = $TargetCast
+@onready var alert_icon : Sprite2D = $AlertIcon
 
 var facing_direction : Vector2 = Vector2.RIGHT
 var player_in_range : bool = false
@@ -75,6 +78,11 @@ func distance_to(target) -> float:
 	
 func set_animation_state(state):
 	state_machine.travel(state)
+	
+func indicate_alert():
+	alert_icon.visible = true
+	await get_tree().create_timer(.3).timeout
+	alert_icon.visible = false
 
 func _on_detection_area_body_entered(body):
 	player_in_range = true
@@ -85,3 +93,9 @@ func _on_detection_area_body_exited(body):
 	player_in_range = false
 	target_ray.enabled = false
 	player = null
+
+func _on_hurtbox_area_entered(area):
+	health -= area.damage
+	# Knockback
+	if health <= 0: 
+		queue_free()

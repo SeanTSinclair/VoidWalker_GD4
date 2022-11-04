@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://c4fcfydypcid3"]
+[gd_scene load_steps=42 format=3 uid="uid://c4fcfydypcid3"]
 
 [ext_resource type="Script" path="res://Enemies/Dark Bot/DarkBot.gd" id="1_3javn"]
 [ext_resource type="Texture2D" uid="uid://dctuqtyep3sqg" path="res://Enemies/Dark Bot/spritesheet.png" id="2_sooyw"]
@@ -7,7 +7,9 @@
 [ext_resource type="Script" path="res://Enemies/Common/WanderState.gd" id="5_e3xmk"]
 [ext_resource type="Script" path="res://Enemies/Common/ChaseState.gd" id="6_klq5s"]
 [ext_resource type="Script" path="res://Enemies/Common/CombatState.gd" id="8_x2glc"]
+[ext_resource type="Texture2D" uid="uid://dsfijabufh12c" path="res://Enemies/Common/alert.png" id="9_41dsk"]
 [ext_resource type="Script" path="res://Enemies/Common/Attack.gd" id="9_gdq68"]
+[ext_resource type="PackedScene" uid="uid://c520yh1b7whrw" path="res://Common/Hurtbox.tscn" id="10_llibk"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fcsqb"]
 radius = 8.0
@@ -208,6 +210,10 @@ graph_offset = Vector2(-127, -22)
 [sub_resource type="CircleShape2D" id="CircleShape2D_4vgwu"]
 radius = 200.0
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ncrks"]
+radius = 8.0
+height = 24.0
+
 [node name="DarkBot" type="CharacterBody2D"]
 scale = Vector2(4, 4)
 collision_layer = 4
@@ -292,8 +298,25 @@ enabled = false
 target_position = Vector2(0, 0)
 collision_mask = 2
 
+[node name="AlertIcon" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, -12.75)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("9_41dsk")
+
+[node name="Hurtbox" parent="." instance=ExtResource("10_llibk")]
+collision_layer = 64
+collision_mask = 8
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+position = Vector2(0, 4)
+shape = SubResource("CapsuleShape2D_ncrks")
+
 [connection signal="timeout" from="StateMachine/WanderTimer" to="StateMachine" method="_on_wander_timer_timeout"]
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_entered" from="DetectionArea" to="StateMachine" method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exited"]
 [connection signal="body_exited" from="DetectionArea" to="StateMachine" method="_on_detection_area_body_exited"]
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
+
+[editable path="Hurtbox"]
