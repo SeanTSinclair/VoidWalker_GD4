@@ -30,12 +30,13 @@ func state_logic(delta):
 	
 func check_transitions():
 	super.check_transitions()
-	
+		
 	if actor.global_position.distance_to(wander_target) <= stopping_distance:
 		if state_machine.is_wandering:
 			set_state(state_machine.states.wander)
 		else:
 			set_state(state_machine.states.idle)
-	
-	if state_machine.target != null:
+	elif actor.can_see_player():
+		actor.has_spotted_player = true
 		set_state(state_machine.states.chase)
+

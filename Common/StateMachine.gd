@@ -29,3 +29,4 @@ func set_state(old_state, new_state):
 	current_state = new_state
 	current_state.enter_state(owner)
 	emit_signal("state_changed", current_state)
+

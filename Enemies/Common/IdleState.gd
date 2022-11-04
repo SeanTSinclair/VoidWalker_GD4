@@ -3,6 +3,8 @@ extends State
 func enter_state(actor):
 	super.enter_state(actor)
 	actor.set_animation_state("idle")
+	actor.has_spotted_player = false
+	actor.player_in_range = false
 	
 func exit_state():
 	super.exit_state()
@@ -15,8 +17,10 @@ func state_logic(delta):
 	
 func check_transitions():
 	super.check_transitions()
-	if state_machine.is_wandering:
-		set_state(state_machine.states.wander)
-	if state_machine.target != null:
+	if actor.can_see_player():
+		actor.has_spotted_player = true
 		set_state(state_machine.states.chase)
+	elif state_machine.is_wandering:
+		set_state(state_machine.states.wander)
+		
 	

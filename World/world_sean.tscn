@@ -541,7 +541,7 @@ player = NodePath("../Player")
 [node name="DarkBot" parent="." instance=ExtResource("5_781e1")]
 position = Vector2(-703, -47)
 
-[node name="AnimationTree" parent="DarkBot" index="4"]
+[node name="AnimationTree" parent="DarkBot" index="3"]
 parameters/playback = SubResource("AnimationNodeStateMachinePlayback_p8nmk")
 
 [node name="Wander" parent="DarkBot/StateMachine" index="1"]

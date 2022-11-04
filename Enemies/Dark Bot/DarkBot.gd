@@ -6,12 +6,19 @@ extends CharacterBody2D
 @onready var state_machine = animation_tree["parameters/playback"]
 @onready var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var start_position : Vector2 = position
+@onready var line_of_sight_ray : RayCast2D= $VisionCast
+@onready var target_ray : RayCast2D = $TargetCast
 
 var facing_direction : Vector2 = Vector2.RIGHT
+var player_in_range : bool = false
+var has_spotted_player : bool = false
+var player = null
 
 func _physics_process(delta):
 	move_and_slide()
 	update_facing_direction()
+	if target_ray.enabled: 
+		target_ray.target_position = player.global_position
 
 func apply_gravity(delta):
 	velocity.y += gravity * delta
@@ -39,6 +46,24 @@ func set_facing_direction(direction):
 		sprite.flip_h = false
 		sprite.offset = Vector2(0, 0)
 		
+func face_player():
+	if direction_to_player().x > 0:
+		set_facing_direction(Vector2.RIGHT)
+	elif direction_to_player().x < 0:
+		set_facing_direction(Vector2.LEFT)
+		
+func can_see_player() -> bool:
+	return line_of_sight_ray.is_colliding()
+	
+func distance_to_player() -> float:
+	return position.distance_to(line_of_sight_ray.get_collision_point())
+	
+func angle_to_player() -> float:
+	return rad_to_deg(position.angle_to_point(target_ray.get_collision_point()))
+		
+func direction_to_player() -> Vector2:
+	return (player.global_position - global_position).normalized()
+		
 func slow_to_stop():
 	velocity.x = move_toward(velocity.x, 0, stats.friction)
 		
@@ -50,3 +75,13 @@ func distance_to(target) -> float:
 	
 func set_animation_state(state):
 	state_machine.travel(state)
+
+func _on_detection_area_body_entered(body):
+	player_in_range = true
+	target_ray.enabled = true
+	player = body
+	
+func _on_detection_area_body_exited(body):
+	player_in_range = false
+	target_ray.enabled = false
+	player = null
