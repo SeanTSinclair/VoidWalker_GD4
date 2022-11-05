@@ -500,10 +500,13 @@ disabled = true
 
 [node name="Hurtbox" parent="." instance=ExtResource("12_y8fi1")]
 collision_layer = 16
+collision_mask = 32
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 position = Vector2(0, 7)
 shape = SubResource("CapsuleShape2D_q4vp3")
+
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
 
 [editable path="Hitbox"]
 [editable path="Hurtbox"]

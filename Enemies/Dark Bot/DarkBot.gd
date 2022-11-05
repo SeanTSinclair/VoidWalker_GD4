@@ -11,6 +11,7 @@ extends CharacterBody2D
 @onready var line_of_sight_ray : RayCast2D= $VisionCast
 @onready var target_ray : RayCast2D = $TargetCast
 @onready var alert_icon : Sprite2D = $AlertIcon
+@onready var hitbox = $Hitbox
 
 var facing_direction : Vector2 = Vector2.RIGHT
 var player_in_range : bool = false
@@ -31,23 +32,21 @@ func move_towards_point(point, speed):
 	
 func update_facing_direction():
 	if velocity.x < 0:
-		facing_direction = Vector2.LEFT
-		sprite.flip_h = true
-		sprite.offset = Vector2(-53, 0)
+		set_facing_direction(Vector2.LEFT)
 	elif velocity.x > 0:
-		facing_direction = Vector2.RIGHT
-		sprite.flip_h = false
-		sprite.offset = Vector2(0, 0)
+		set_facing_direction(Vector2.LEFT)
 		
 func set_facing_direction(direction):
 	if direction.x < 0: 
 		facing_direction = Vector2.LEFT
 		sprite.flip_h = true
 		sprite.offset = Vector2(-53, 0)
-	else: 
+		hitbox.scale.x = 1
+	elif direction.x > 0: 
 		facing_direction = Vector2.RIGHT
 		sprite.flip_h = false
 		sprite.offset = Vector2(0, 0)
+		hitbox.scale.x = -1
 		
 func face_player():
 	if direction_to_player().x > 0:

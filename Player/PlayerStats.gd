@@ -14,3 +14,7 @@ class_name PlayerStats
 @export var jump_height : float = 200.0
 @export var time_to_reach_peak : float = 0.4
 @export var time_to_descent : float = 0.5
+
+# Character
+@export var health : int = 3
+@export var max_health : int = 3

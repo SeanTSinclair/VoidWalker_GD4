@@ -1,5 +1,8 @@
 extends CharacterBody2D
 
+signal dead
+signal take_damage(current_health)
+
 @onready var stats = preload("res://Player/PlayerStats.tres")
 @onready var animation_manager = $AnimationManager
 @onready var sprite = $Sprite2D
@@ -29,3 +32,11 @@ func apply_gravity(delta):
 
 func get_gravity() -> float:
 	return jump_gravity if velocity.y < 0.0 else fall_gravity
+
+func _on_hurtbox_area_entered(area):
+	stats.health -= area.damage
+	print("Ouchie")
+	emit_signal("take_damage", stats.health)
+	if stats.health <= 0:
+		emit_signal("dead")
+		queue_free()

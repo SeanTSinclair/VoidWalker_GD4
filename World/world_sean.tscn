@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bgr6rl5qmd6r7"]
+[gd_scene load_steps=13 format=3 uid="uid://bgr6rl5qmd6r7"]
 
 [ext_resource type="PackedScene" uid="uid://d3eybhhghmlho" path="res://Player/Player.tscn" id="1_eqp0r"]
 [ext_resource type="Script" path="res://World/World.gd" id="1_hn4xj"]
@@ -10,6 +10,8 @@
 [sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_nkhb0"]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_p8nmk"]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_1tjpl"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5bhhf"]
 resource_name = "Mossy"
@@ -562,6 +564,25 @@ position = Vector2(2954, 129)
 one_shot = true
 autostart = true
 
+[node name="DarkBot2" parent="." instance=ExtResource("5_781e1")]
+position = Vector2(100, 107)
+
+[node name="AnimationTree" parent="DarkBot2" index="3"]
+parameters/playback = SubResource("AnimationNodeStateMachinePlayback_1tjpl")
+
+[node name="Wander" parent="DarkBot2/StateMachine" index="1"]
+state_name = null
+
+[node name="WanderPosA" parent="DarkBot2/StateMachine/Wander" index="0"]
+position = Vector2(-47, 147)
+
+[node name="WanderPosB" parent="DarkBot2/StateMachine/Wander" index="1"]
+position = Vector2(311, 125)
+
+[node name="@WanderTimer@88441" type="Timer" parent="DarkBot2/StateMachine" index="2"]
+one_shot = true
+autostart = true
+
 [node name="TileMap" type="TileMap" parent="."]
 scale = Vector2(0.3, 0.3)
 tile_set = SubResource("TileSet_tmrkf")
@@ -608,3 +629,5 @@ label_settings = SubResource("LabelSettings_ysiqt")
 [editable path="Portals"]
 [editable path="DarkBot"]
 [editable path="DarkBot/Hurtbox"]
+[editable path="DarkBot2"]
+[editable path="DarkBot2/Hurtbox"]
