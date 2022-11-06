@@ -18,3 +18,6 @@ class_name PlayerStats
 # Character
 @export var health : int = 3
 @export var max_health : int = 3
+
+func heal(amount):
+	self.health = min(self.health + amount, max_health)

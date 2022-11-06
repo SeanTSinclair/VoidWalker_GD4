@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bgr6rl5qmd6r7"]
+[gd_scene load_steps=14 format=3 uid="uid://bgr6rl5qmd6r7"]
 
 [ext_resource type="PackedScene" uid="uid://d3eybhhghmlho" path="res://Player/Player.tscn" id="1_eqp0r"]
 [ext_resource type="Script" path="res://World/World.gd" id="1_hn4xj"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://c4fcfydypcid3" path="res://Enemies/Dark Bot/DarkBot.tscn" id="5_781e1"]
 [ext_resource type="PackedScene" uid="uid://4m4xv7ifuc1j" path="res://Player/Drone/Drone.tscn" id="5_k787d"]
 [ext_resource type="PackedScene" uid="uid://c6wpwly0jn23p" path="res://World/Hazard.tscn" id="7_cnvxd"]
+[ext_resource type="PackedScene" uid="uid://b8dhq32n7pn8f" path="res://World/Items/Potions/Potion.tscn" id="8_8am8k"]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_nkhb0"]
 
@@ -611,6 +612,9 @@ position = Vector2(1070, -256)
 
 [node name="RayCast2D" parent="Hazard2" index="1"]
 target_position = Vector2(0, 425)
+
+[node name="Potion" parent="." instance=ExtResource("8_8am8k")]
+position = Vector2(-501, 135)
 
 [editable path="Player"]
 [editable path="Player/Hitbox"]

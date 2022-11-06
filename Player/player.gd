@@ -32,6 +32,9 @@ func apply_gravity(delta):
 
 func get_gravity() -> float:
 	return jump_gravity if velocity.y < 0.0 else fall_gravity
+	
+func heal(amount): 
+	stats.heal(amount)
 
 func _on_hurtbox_area_entered(area):
 	stats.health -= area.damage
