@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://c6wpwly0jn23p"]
+
+[ext_resource type="Texture2D" uid="uid://d14ebgp02futa" path="res://World/Mossy Tileset/Mossy - Hanging Plants.png" id="1_i6m42"]
+[ext_resource type="Script" path="res://World/Hazard.gd" id="1_vn4hx"]
+[ext_resource type="PackedScene" uid="uid://d1ynxpis67fr2" path="res://Common/Hitbox.tscn" id="2_win3t"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fj2bg"]
+radius = 7.0
+height = 168.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a52jq"]
+radius = 7.0
+height = 162.0
+
+[node name="Hazard" type="Area2D"]
+script = ExtResource("1_vn4hx")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.1, 0.129)
+texture = ExtResource("1_i6m42")
+region_enabled = true
+region_rect = Rect2(77.998, 1390.53, 474.77, 1396)
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(0, 450)
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_fj2bg")
+
+[node name="Hitbox" parent="." instance=ExtResource("2_win3t")]
+collision_layer = 32
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+shape = SubResource("CapsuleShape2D_a52jq")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+
+[editable path="Hitbox"]

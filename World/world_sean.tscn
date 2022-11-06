@@ -6,12 +6,11 @@
 [ext_resource type="PackedScene" uid="uid://dbmf405cmeo58" path="res://World/Portal/Portals.tscn" id="4_gvc3m"]
 [ext_resource type="PackedScene" uid="uid://c4fcfydypcid3" path="res://Enemies/Dark Bot/DarkBot.tscn" id="5_781e1"]
 [ext_resource type="PackedScene" uid="uid://4m4xv7ifuc1j" path="res://Player/Drone/Drone.tscn" id="5_k787d"]
+[ext_resource type="PackedScene" uid="uid://c6wpwly0jn23p" path="res://World/Hazard.tscn" id="7_cnvxd"]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_nkhb0"]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_p8nmk"]
-
-[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_1tjpl"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5bhhf"]
 resource_name = "Mossy"
@@ -564,25 +563,6 @@ position = Vector2(2954, 129)
 one_shot = true
 autostart = true
 
-[node name="DarkBot2" parent="." instance=ExtResource("5_781e1")]
-position = Vector2(100, 107)
-
-[node name="AnimationTree" parent="DarkBot2" index="3"]
-parameters/playback = SubResource("AnimationNodeStateMachinePlayback_1tjpl")
-
-[node name="Wander" parent="DarkBot2/StateMachine" index="1"]
-state_name = null
-
-[node name="WanderPosA" parent="DarkBot2/StateMachine/Wander" index="0"]
-position = Vector2(-47, 147)
-
-[node name="WanderPosB" parent="DarkBot2/StateMachine/Wander" index="1"]
-position = Vector2(311, 125)
-
-[node name="@WanderTimer@88441" type="Timer" parent="DarkBot2/StateMachine" index="2"]
-one_shot = true
-autostart = true
-
 [node name="TileMap" type="TileMap" parent="."]
 scale = Vector2(0.3, 0.3)
 tile_set = SubResource("TileSet_tmrkf")
@@ -623,11 +603,22 @@ offset_bottom = 93.0
 text = "LMB to attack"
 label_settings = SubResource("LabelSettings_ysiqt")
 
+[node name="Hazard" parent="." instance=ExtResource("7_cnvxd")]
+position = Vector2(926, -253)
+
+[node name="Hazard2" parent="." instance=ExtResource("7_cnvxd")]
+position = Vector2(1070, -256)
+
+[node name="RayCast2D" parent="Hazard2" index="1"]
+target_position = Vector2(0, 425)
+
 [editable path="Player"]
 [editable path="Player/Hitbox"]
 [editable path="Player/Hurtbox"]
 [editable path="Portals"]
 [editable path="DarkBot"]
 [editable path="DarkBot/Hurtbox"]
-[editable path="DarkBot2"]
-[editable path="DarkBot2/Hurtbox"]
+[editable path="Hazard"]
+[editable path="Hazard/Hitbox"]
+[editable path="Hazard2"]
+[editable path="Hazard2/Hitbox"]

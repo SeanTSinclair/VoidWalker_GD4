@@ -9,7 +9,10 @@ var states = null
 func state_logic(delta):
 	super.state_logic(delta)
 	if !has_dashed:
-		actor.velocity = state_machine.get_input_axis() * actor.stats.dash_speed
+		var dash_direction = state_machine.get_input_axis()
+		if dash_direction == Vector2.ZERO:
+			dash_direction = state_machine.facing_direction()
+		actor.velocity = dash_direction * actor.stats.dash_speed
 		Input.start_joy_vibration(0, 1, .4, 0.2)
 		state_machine.is_dashing = true
 		has_dashed = true

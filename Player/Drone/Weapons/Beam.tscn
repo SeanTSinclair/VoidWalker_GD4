@@ -1,11 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://deqqe8bdh83to"]
+[gd_scene load_steps=6 format=3 uid="uid://deqqe8bdh83to"]
 
 [ext_resource type="Script" path="res://Common/Projectile.gd" id="1_2k7hv"]
 [ext_resource type="Texture2D" uid="uid://c711h7h30m8dj" path="res://Player/Drone/Weapons/Beam.png" id="1_l0umb"]
+[ext_resource type="PackedScene" uid="uid://d1ynxpis67fr2" path="res://Common/Hitbox.tscn" id="3_36s7c"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_27kuk"]
 radius = 4.0
 height = 32.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nfeix"]
+radius = 4.0
 
 [node name="Beam" type="Area2D"]
 scale = Vector2(0.5, 0.5)
@@ -22,4 +26,13 @@ texture = ExtResource("1_l0umb")
 rotation = -1.5708
 shape = SubResource("CapsuleShape2D_27kuk")
 
+[node name="Hitbox" parent="." instance=ExtResource("3_36s7c")]
+collision_layer = 8
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+rotation = -1.5708
+shape = SubResource("CapsuleShape2D_nfeix")
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+
+[editable path="Hitbox"]

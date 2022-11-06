@@ -74,7 +74,7 @@ func direction_to(target) -> Vector2:
 	
 func distance_to(target) -> float:
 	return global_position.distance_to(target)
-	
+		
 func set_animation_state(state):
 	state_machine.travel(state)
 	

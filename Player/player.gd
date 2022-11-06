@@ -35,8 +35,8 @@ func get_gravity() -> float:
 
 func _on_hurtbox_area_entered(area):
 	stats.health -= area.damage
-	print("Ouchie")
+	Input.start_joy_vibration(0, 1, .4, 0.2)
 	emit_signal("take_damage", stats.health)
 	if stats.health <= 0:
 		emit_signal("dead")
-		queue_free()
+		print("I am dead now")
