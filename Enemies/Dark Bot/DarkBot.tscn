@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://c4fcfydypcid3"]
+[gd_scene load_steps=51 format=3 uid="uid://c4fcfydypcid3"]
 
 [ext_resource type="Script" path="res://Enemies/Dark Bot/DarkBot.gd" id="1_3javn"]
 [ext_resource type="Texture2D" uid="uid://dctuqtyep3sqg" path="res://Enemies/Dark Bot/spritesheet.png" id="2_sooyw"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://Enemies/Common/ChaseState.gd" id="6_klq5s"]
 [ext_resource type="Script" path="res://Enemies/Common/CombatState.gd" id="8_x2glc"]
 [ext_resource type="Texture2D" uid="uid://dsfijabufh12c" path="res://Enemies/Common/alert.png" id="9_41dsk"]
+[ext_resource type="Script" path="res://Enemies/Common/StunnedState.gd" id="9_83jsi"]
 [ext_resource type="Script" path="res://Enemies/Common/Attack.gd" id="9_gdq68"]
 [ext_resource type="PackedScene" uid="uid://c520yh1b7whrw" path="res://Common/Hurtbox.tscn" id="10_llibk"]
 [ext_resource type="Script" path="res://Common/Hitbox.gd" id="11_opiwm"]
@@ -177,6 +178,23 @@ tracks/1/keys = {
 "values": [false, true]
 }
 
+[sub_resource type="Animation" id="Animation_wmgsf"]
+resource_name = "stunned"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [20, 21]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_suy85"]
 _data = {
 "RESET": SubResource("Animation_ibov4"),
@@ -185,7 +203,8 @@ _data = {
 "hit": SubResource("Animation_k7okd"),
 "idle": SubResource("Animation_k07hg"),
 "run": SubResource("Animation_6b410"),
-"shoot": SubResource("Animation_6qhkw")
+"shoot": SubResource("Animation_6qhkw"),
+"stunned": SubResource("Animation_wmgsf")
 }
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_jimch"]
@@ -205,6 +224,9 @@ animation = &"run"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_n4vcb"]
 animation = &"shoot"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4fetp"]
+animation = &"stunned"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fi6kw"]
 
@@ -236,6 +258,12 @@ auto_advance = true
 switch_mode = 2
 auto_advance = true
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_h2hot"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_b6uki"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_gw6p4"]
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_lqrlk"]
 states/End/position = Vector2(661, 93)
 states/Start/position = Vector2(219, 93)
@@ -251,7 +279,9 @@ states/run/node = SubResource("AnimationNodeAnimation_8b13f")
 states/run/position = Vector2(331, 171)
 states/shoot/node = SubResource("AnimationNodeAnimation_n4vcb")
 states/shoot/position = Vector2(448, 13)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_fi6kw"), "idle", "attack", SubResource("AnimationNodeStateMachineTransition_451gb"), "attack", "idle", SubResource("AnimationNodeStateMachineTransition_rdnbj"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_nohex"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_04cae"), "idle", "hit", SubResource("AnimationNodeStateMachineTransition_33grq"), "hit", "idle", SubResource("AnimationNodeStateMachineTransition_jhy0v"), "idle", "shoot", SubResource("AnimationNodeStateMachineTransition_pv736"), "shoot", "idle", SubResource("AnimationNodeStateMachineTransition_lhqsl"), "hit", "death", SubResource("AnimationNodeStateMachineTransition_f4xjr"), "death", "hit", SubResource("AnimationNodeStateMachineTransition_v2nbi"), "death", "End", SubResource("AnimationNodeStateMachineTransition_o0cnw")]
+states/stunned/node = SubResource("AnimationNodeAnimation_4fetp")
+states/stunned/position = Vector2(437, 171)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_fi6kw"), "idle", "attack", SubResource("AnimationNodeStateMachineTransition_451gb"), "attack", "idle", SubResource("AnimationNodeStateMachineTransition_rdnbj"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_nohex"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_04cae"), "idle", "hit", SubResource("AnimationNodeStateMachineTransition_33grq"), "hit", "idle", SubResource("AnimationNodeStateMachineTransition_jhy0v"), "idle", "shoot", SubResource("AnimationNodeStateMachineTransition_pv736"), "shoot", "idle", SubResource("AnimationNodeStateMachineTransition_lhqsl"), "hit", "death", SubResource("AnimationNodeStateMachineTransition_f4xjr"), "death", "hit", SubResource("AnimationNodeStateMachineTransition_v2nbi"), "death", "End", SubResource("AnimationNodeStateMachineTransition_o0cnw"), "idle", "stunned", SubResource("AnimationNodeStateMachineTransition_h2hot"), "stunned", "run", SubResource("AnimationNodeStateMachineTransition_b6uki"), "stunned", "idle", SubResource("AnimationNodeStateMachineTransition_gw6p4")]
 graph_offset = Vector2(-127, -22)
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_2nfoi"]
@@ -314,7 +344,7 @@ state_name = "wander"
 
 [node name="WanderPosB" type="Node2D" parent="StateMachine/Wander"]
 
-[node name="ChaseState" type="Node" parent="StateMachine"]
+[node name="Chase" type="Node" parent="StateMachine"]
 script = ExtResource("6_klq5s")
 state_name = "chase"
 
@@ -335,6 +365,13 @@ animation_name = "attack"
 
 [node name="WanderTimer" type="Timer" parent="StateMachine"]
 autostart = true
+
+[node name="Stunned" type="Node" parent="StateMachine"]
+script = ExtResource("9_83jsi")
+state_name = "stunned"
+
+[node name="Timer" type="Timer" parent="StateMachine/Stunned"]
+one_shot = true
 
 [node name="DetectionArea" type="Area2D" parent="."]
 collision_layer = 0
@@ -382,6 +419,7 @@ shape = SubResource("RectangleShape2D_r7vjr")
 disabled = true
 
 [connection signal="timeout" from="StateMachine/WanderTimer" to="StateMachine" method="_on_wander_timer_timeout"]
+[connection signal="timeout" from="StateMachine/Stunned/Timer" to="StateMachine/Stunned" method="_on_timer_timeout"]
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_entered" from="DetectionArea" to="StateMachine" method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exited"]

@@ -23,4 +23,5 @@ func check_transitions():
 		set_state(state_machine.states.wander)
 	elif actor.position.distance_to(state_machine.target.global_position) < COMBAT_RANGE:
 		set_state(state_machine.states.combat)
+		
 	

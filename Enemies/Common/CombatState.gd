@@ -58,6 +58,9 @@ func check_transitions():
 		actor.has_spotted_player = false
 		actor.target_ray.enabled = false
 		set_state(state_machine.states.wander)
+		
+	elif actor.is_stunned: 
+		set_state(state_machine.states.stunned)
 
 func distance_based_checks():
 	var distance = ranged_distance if is_attacking_from_range else melee_distance

@@ -17,6 +17,7 @@ var facing_direction : Vector2 = Vector2.RIGHT
 var player_in_range : bool = false
 var has_spotted_player : bool = false
 var player = null
+var is_stunned : bool = false
 
 func _physics_process(delta):
 	move_and_slide()
@@ -82,6 +83,9 @@ func indicate_alert():
 	alert_icon.visible = true
 	await get_tree().create_timer(.3).timeout
 	alert_icon.visible = false
+	
+func counter():
+	is_stunned = true
 
 func _on_detection_area_body_entered(body):
 	player_in_range = true

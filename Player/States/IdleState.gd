@@ -18,13 +18,15 @@ func check_transitions():
 	var is_on_floor = state_machine.is_on_floor
 	var is_dashing = state_machine.is_dashing
 	
-	if !is_dashing && state_machine.get_input_axis() != Vector2.ZERO:
-		set_state(states.move)
 	if Input.is_action_just_pressed("jump") && is_on_floor:
 		set_state(states.jump)
-	if Input.is_action_just_pressed("dash") && !is_dashing:
+	elif Input.is_action_just_pressed("dash") && !is_dashing:
 		set_state(states.dash)
-	if !is_on_floor:
+	elif !is_on_floor:
 		set_state(states.in_air)
-	if Input.is_action_just_pressed("primary_attack"):
+	elif Input.is_action_just_pressed("primary_attack"):
 		set_state(states.attack)
+	elif Input.is_action_just_pressed("block"):
+		set_state(states.block)
+	elif !is_dashing && state_machine.get_input_axis() != Vector2.ZERO:
+		set_state(states.move)

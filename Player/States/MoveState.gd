@@ -31,11 +31,13 @@ func check_transitions():
 	
 	if !is_dashing && state_machine.get_input_axis() == Vector2.ZERO:
 		set_state(states.idle)
-	if Input.is_action_just_pressed("jump") && is_on_floor:
+	elif Input.is_action_just_pressed("jump") && is_on_floor:
 		set_state(states.jump)
-	if Input.is_action_just_pressed("dash") && !is_dashing:
+	elif Input.is_action_just_pressed("dash") && !is_dashing:
 		set_state(states.dash)
-	if Input.is_action_just_pressed("primary_attack"):
+	elif Input.is_action_just_pressed("primary_attack"):
 		set_state(states.attack)
-	if !is_on_floor:
+	elif Input.is_action_just_pressed("block"):
+		set_state(states.block)
+	elif !is_on_floor:
 		set_state(states.in_air)

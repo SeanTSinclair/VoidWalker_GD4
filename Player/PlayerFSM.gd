@@ -7,6 +7,7 @@ var dash_count : int = 0
 var is_on_floor : bool = false
 var can_jump : bool = true
 var can_air_attack : bool = true
+var is_taking_damage : bool = false
 
 func _ready():
 	initialize()
@@ -19,6 +20,7 @@ func _physics_process(delta):
 	is_on_floor = player.is_on_floor()
 	
 	set_player_orientation(input_axis)
+	set_deferred("is_taking_damage", false)
 	
 func set_player_orientation(input_axis):
 	if input_axis.x < 0:

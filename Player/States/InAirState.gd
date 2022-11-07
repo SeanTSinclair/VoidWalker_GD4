@@ -59,3 +59,5 @@ func check_transitions():
 			set_state(states.attack)
 	elif Input.is_action_just_pressed("jump") && coyote_timer.time_left != 0:
 		set_state(states.jump)
+	elif Input.is_action_just_pressed("block"):
+		set_state(states.block)

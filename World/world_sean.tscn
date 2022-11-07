@@ -523,7 +523,7 @@ shadow_color = Color(0.176471, 0.121569, 0, 0.305882)
 script = ExtResource("1_hn4xj")
 
 [node name="Player" parent="." instance=ExtResource("1_eqp0r")]
-position = Vector2(-1104, 83)
+position = Vector2(1307, 80)
 scale = Vector2(5, 5)
 
 [node name="AnimationTree" parent="Player/AnimationManager" index="1"]
@@ -546,7 +546,7 @@ position = Vector2(-1162, 27)
 player = NodePath("../Player")
 
 [node name="DarkBot" parent="." instance=ExtResource("5_781e1")]
-position = Vector2(2221, 103)
+position = Vector2(2808, 100)
 
 [node name="AnimationTree" parent="DarkBot" index="3"]
 parameters/playback = SubResource("AnimationNodeStateMachinePlayback_p8nmk")
