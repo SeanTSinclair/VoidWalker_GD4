@@ -2,6 +2,10 @@ extends State
 
 var states = null
 
+func enter_state(actor):
+	super.enter_state(actor)
+	state_machine.can_air_attack = true
+
 func state_logic(delta):
 	super.state_logic(delta)
 	actor.set_animation_state("idle")

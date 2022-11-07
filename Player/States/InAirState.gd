@@ -45,6 +45,7 @@ func check_transitions():
 	if is_on_floor:
 		state_machine.dash_count = 0
 		if jump_buffer_timer.time_left == 0:
+			actor.set_animation_state("land")
 			set_state(states.idle)
 		else: 
 			set_state(states.jump)
@@ -52,6 +53,9 @@ func check_transitions():
 		state_machine.dash_count += 1
 		set_state(states.dash)
 	elif Input.is_action_just_pressed("primary_attack"):
-		set_state(states.attack)
+		if state_machine.get_input_axis().y > 0.5 && state_machine.can_air_attack:
+			set_state(states.air_attack)
+		else: 
+			set_state(states.attack)
 	elif Input.is_action_just_pressed("jump") && coyote_timer.time_left != 0:
 		set_state(states.jump)

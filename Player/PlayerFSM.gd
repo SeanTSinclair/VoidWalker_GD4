@@ -6,6 +6,7 @@ var is_dashing : bool = false
 var dash_count : int = 0
 var is_on_floor : bool = false
 var can_jump : bool = true
+var can_air_attack : bool = true
 
 func _ready():
 	initialize()
