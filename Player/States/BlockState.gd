@@ -8,6 +8,7 @@ func enter_state(actor):
 	actor.set_animation_state("blocking")
 	actor.is_blocking = true
 	actor.is_countering = true
+	state_machine.input_enabled(false)
 	get_tree().create_timer(counter_duration).connect("timeout", Callable(self, "reset_counter"))
 
 func reset_counter():
@@ -17,6 +18,7 @@ func reset_counter():
 func exit_state():
 	actor.is_blocking = false
 	actor.is_countering = false
+	state_machine.input_enabled(true)
 	super.exit_state()
 	has_blocked = false
 

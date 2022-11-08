@@ -8,6 +8,7 @@ var is_on_floor : bool = false
 var can_jump : bool = true
 var can_air_attack : bool = true
 var is_taking_damage : bool = false
+var is_reading_input : bool = true
 
 func _ready():
 	initialize()
@@ -30,9 +31,13 @@ func set_player_orientation(input_axis):
 		
 func facing_direction() -> Vector2:
 	return Vector2.LEFT if player.sprite.flip_h else Vector2.RIGHT
+	
+func input_enabled(enabled):
+	is_reading_input = enabled
 
 func get_input_axis() -> Vector2:
 	var input_axis = Vector2.ZERO
-	input_axis.x = int(Input.is_action_pressed("move_right")) - int(Input.is_action_pressed("move_left"))
-	input_axis.y = int(Input.is_action_pressed("move_down")) - int(Input.is_action_pressed("move_up"))
+	if is_reading_input:
+		input_axis.x = int(Input.is_action_pressed("move_right")) - int(Input.is_action_pressed("move_left"))
+		input_axis.y = int(Input.is_action_pressed("move_down")) - int(Input.is_action_pressed("move_up"))
 	return input_axis.normalized()

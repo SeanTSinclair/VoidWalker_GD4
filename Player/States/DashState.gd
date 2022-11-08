@@ -38,7 +38,9 @@ func enter_state(actor):
 	actor.velocity = dash_direction * actor.stats.dash_speed
 	Input.start_joy_vibration(0, 1, .4, 0.2)
 	state_machine.is_dashing = true
+	state_machine.input_enabled(false)
 
 func exit_state():
 	state_machine.is_dashing = false
+	state_machine.input_enabled(true)
 	super.exit_state()

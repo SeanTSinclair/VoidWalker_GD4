@@ -62,6 +62,7 @@ func enter_state(actor):
 	attacks = get_children()
 	max_attacks_in_sequence = attacks.size()
 	queue_next_attack()
+	state_machine.input_enabled(false)
 	
 
 func exit_state():
@@ -69,6 +70,7 @@ func exit_state():
 	attack_ended = true
 	next_attack_queued = false
 	attack_sequence = 0
+	state_machine.input_enabled(true)
 	
 func reset_dash_timer():
 	dash_queued = false
