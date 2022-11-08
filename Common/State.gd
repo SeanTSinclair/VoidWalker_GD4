@@ -2,6 +2,7 @@ extends Node
 class_name State
 
 @export var state_name : String
+@export var unlocked : bool = true
 
 var actor = null
 var state_machine = null

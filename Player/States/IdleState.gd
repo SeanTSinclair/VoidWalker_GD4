@@ -9,7 +9,7 @@ func enter_state(actor):
 func state_logic(delta):
 	super.state_logic(delta)
 	actor.set_animation_state("idle")
-	actor.velocity.x = move_toward(actor.velocity.x, 0, actor.stats.friction)
+	actor.slow_to_stop()
 
 func check_transitions():
 	super.check_transitions()
@@ -21,7 +21,10 @@ func check_transitions():
 	if Input.is_action_just_pressed("jump") && is_on_floor:
 		set_state(states.jump)
 	elif Input.is_action_just_pressed("dash") && !is_dashing:
-		set_state(states.dash)
+		if is_on_floor:
+			set_state(states.roll)
+		else: 
+			set_state(states.dash)
 	elif !is_on_floor:
 		set_state(states.in_air)
 	elif Input.is_action_just_pressed("primary_attack"):

@@ -23,6 +23,7 @@ func initialize():
 	
 
 func set_state(old_state, new_state):
+	if !new_state.unlocked: return
 	if current_state != null:
 		current_state.exit_state()
 	previous_state = old_state

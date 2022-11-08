@@ -5,6 +5,7 @@ class_name PlayerStats
 @export var move_speed : float = 300.0
 @export var run_speed : float = 350.0
 @export var friction : float = 300.0
+@export var roll_speed : float = 500.0
 
 # Dash
 @export var dash_speed : float = 800.0

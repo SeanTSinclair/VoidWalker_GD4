@@ -14,6 +14,7 @@ signal take_damage(current_health)
 
 var is_blocking : bool = false
 var is_countering : bool = false
+var is_dodging : bool = false
 
 func set_flipped(is_flipped):
 	if is_flipped: 
@@ -37,11 +38,19 @@ func apply_gravity(delta):
 func get_gravity() -> float:
 	return jump_gravity if velocity.y < 0.0 else fall_gravity
 	
+func slow_to_stop():
+	velocity.x = move_toward(velocity.x, 0, stats.friction)
+	
 func heal(amount): 
 	stats.heal(amount)
+	
+func reset_dodge():
+	is_dodging = false
 
 func _on_hurtbox_area_entered(area):
-	if !is_blocking:
+	if is_dodging:
+		return
+	elif !is_blocking:
 		stats.health -= area.damage
 		Input.start_joy_vibration(0, 1, .4, 0.2)
 		emit_signal("take_damage", stats.health)

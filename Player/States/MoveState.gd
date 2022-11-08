@@ -34,7 +34,10 @@ func check_transitions():
 	elif Input.is_action_just_pressed("jump") && is_on_floor:
 		set_state(states.jump)
 	elif Input.is_action_just_pressed("dash") && !is_dashing:
-		set_state(states.dash)
+		if actor.is_on_floor():
+			set_state(states.roll)
+		else:
+			set_state(states.dash)
 	elif Input.is_action_just_pressed("primary_attack"):
 		set_state(states.attack)
 	elif Input.is_action_just_pressed("block"):

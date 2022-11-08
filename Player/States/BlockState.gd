@@ -22,7 +22,7 @@ func exit_state():
 
 func state_logic(delta):
 	super.state_logic(delta)
-	actor.velocity.x = move_toward(actor.velocity.x, 0, actor.stats.friction)
+	actor.slow_to_stop()
 	actor.apply_gravity(delta)
 	if state_machine.is_taking_damage:
 		has_blocked = true
