@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://bl8xt6q6unswl"]
+
+[ext_resource type="Script" path="res://Player/UI/PlayerUI.gd" id="1_y7061"]
+[ext_resource type="Script" path="res://Player/UI/HealthBar.gd" id="2_e6ggk"]
+
+[node name="UI" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+script = ExtResource("1_y7061")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TopRow" type="VBoxContainer" parent="CanvasLayer"]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 60.0
+offset_bottom = 60.0
+
+[node name="HealthBar" type="HBoxContainer" parent="CanvasLayer/TopRow"]
+layout_mode = 2
+offset_right = 40.0
+script = ExtResource("2_e6ggk")
