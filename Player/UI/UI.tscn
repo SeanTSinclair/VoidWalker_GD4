@@ -1,15 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://bl8xt6q6unswl"]
+[gd_scene load_steps=4 format=3 uid="uid://bl8xt6q6unswl"]
 
 [ext_resource type="Script" path="res://Player/UI/PlayerUI.gd" id="1_y7061"]
 [ext_resource type="Script" path="res://Player/UI/HealthBar.gd" id="2_e6ggk"]
+[ext_resource type="PackedScene" uid="uid://542ux5fxkxvk" path="res://Player/UI/HPIcon.tscn" id="3_akaub"]
 
 [node name="UI" type="Control"]
 layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 0
@@ -21,10 +20,21 @@ script = ExtResource("1_y7061")
 [node name="TopRow" type="VBoxContainer" parent="CanvasLayer"]
 offset_left = 20.0
 offset_top = 20.0
-offset_right = 60.0
-offset_bottom = 60.0
+offset_right = 178.0
+offset_bottom = 36.0
+scale = Vector2(1.5, 1.5)
 
 [node name="HealthBar" type="HBoxContainer" parent="CanvasLayer/TopRow"]
-layout_mode = 2
-offset_right = 40.0
+offset_right = 158.0
+offset_bottom = 16.0
 script = ExtResource("2_e6ggk")
+
+[node name="HealthBarIcon" parent="CanvasLayer/TopRow/HealthBar" instance=ExtResource("3_akaub")]
+
+[node name="HealthBarIcon2" parent="CanvasLayer/TopRow/HealthBar" instance=ExtResource("3_akaub")]
+offset_left = 54.0
+offset_right = 104.0
+
+[node name="HealthBarIcon3" parent="CanvasLayer/TopRow/HealthBar" instance=ExtResource("3_akaub")]
+offset_left = 108.0
+offset_right = 158.0

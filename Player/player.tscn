@@ -334,7 +334,8 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_y7pwa"]
 resource_name = "land"
-length = 0.4
+length = 0.3
+step = 0.025
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -342,7 +343,7 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 0
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"times": PackedFloat32Array(0, 0.05, 0.15, 0.225),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [190, 191, 192, 193]
@@ -544,15 +545,7 @@ auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xmqye"]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3jx1a"]
-switch_mode = 2
-auto_advance = true
-
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5iatr"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_spt2o"]
-switch_mode = 2
-auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ly2og"]
 
@@ -602,6 +595,10 @@ auto_advance = true
 switch_mode = 2
 auto_advance = true
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2sl67"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_44eq7"]
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_vfh3e"]
 states/End/position = Vector2(626, 100)
 states/Start/position = Vector2(11, 100)
@@ -637,8 +634,8 @@ states/run/node = SubResource("AnimationNodeAnimation_5h17o")
 states/run/position = Vector2(229, -32)
 states/walk/node = SubResource("AnimationNodeAnimation_oa6hl")
 states/walk/position = Vector2(228, 42)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_vti2j"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_nksr6"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_c5cm4"), "idle", "jump_up", SubResource("AnimationNodeStateMachineTransition_4iik6"), "jump_up", "jump_apex", SubResource("AnimationNodeStateMachineTransition_sylrq"), "jump_apex", "fall", SubResource("AnimationNodeStateMachineTransition_8sa60"), "idle", "fall", SubResource("AnimationNodeStateMachineTransition_fse5w"), "idle", "dash", SubResource("AnimationNodeStateMachineTransition_xmqye"), "dash", "idle", SubResource("AnimationNodeStateMachineTransition_3jx1a"), "fall", "dash", SubResource("AnimationNodeStateMachineTransition_5iatr"), "dash", "fall", SubResource("AnimationNodeStateMachineTransition_spt2o"), "walk", "run", SubResource("AnimationNodeStateMachineTransition_ly2og"), "run", "walk", SubResource("AnimationNodeStateMachineTransition_1wlfo"), "idle", "attack_1", SubResource("AnimationNodeStateMachineTransition_lxy7o"), "attack_1", "idle", SubResource("AnimationNodeStateMachineTransition_wmye4"), "attack_1", "attack_2", SubResource("AnimationNodeStateMachineTransition_vi28u"), "attack_2", "idle", SubResource("AnimationNodeStateMachineTransition_gw6sp"), "attack_2", "attack_3", SubResource("AnimationNodeStateMachineTransition_07t1j"), "attack_3", "idle", SubResource("AnimationNodeStateMachineTransition_5jqks"), "fall", "air_attack", SubResource("AnimationNodeStateMachineTransition_6o01y"), "air_attack", "fall", SubResource("AnimationNodeStateMachineTransition_cjn2x"), "idle", "blocking", SubResource("AnimationNodeStateMachineTransition_gtvsx"), "blocking", "idle", SubResource("AnimationNodeStateMachineTransition_pe5im"), "blocking", "block", SubResource("AnimationNodeStateMachineTransition_5qdki"), "block", "idle", SubResource("AnimationNodeStateMachineTransition_ovec4"), "fall", "land", SubResource("AnimationNodeStateMachineTransition_66260"), "land", "idle", SubResource("AnimationNodeStateMachineTransition_y3nvj"), "idle", "roll", SubResource("AnimationNodeStateMachineTransition_lrdbs"), "roll", "idle", SubResource("AnimationNodeStateMachineTransition_tqv5t"), "roll", "roll_attack", SubResource("AnimationNodeStateMachineTransition_pj7yp"), "roll_attack", "idle", SubResource("AnimationNodeStateMachineTransition_3r8hi")]
-graph_offset = Vector2(-185, 13.0281)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_vti2j"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_nksr6"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_c5cm4"), "idle", "jump_up", SubResource("AnimationNodeStateMachineTransition_4iik6"), "jump_up", "jump_apex", SubResource("AnimationNodeStateMachineTransition_sylrq"), "jump_apex", "fall", SubResource("AnimationNodeStateMachineTransition_8sa60"), "idle", "fall", SubResource("AnimationNodeStateMachineTransition_fse5w"), "idle", "dash", SubResource("AnimationNodeStateMachineTransition_xmqye"), "fall", "dash", SubResource("AnimationNodeStateMachineTransition_5iatr"), "walk", "run", SubResource("AnimationNodeStateMachineTransition_ly2og"), "run", "walk", SubResource("AnimationNodeStateMachineTransition_1wlfo"), "idle", "attack_1", SubResource("AnimationNodeStateMachineTransition_lxy7o"), "attack_1", "idle", SubResource("AnimationNodeStateMachineTransition_wmye4"), "attack_1", "attack_2", SubResource("AnimationNodeStateMachineTransition_vi28u"), "attack_2", "idle", SubResource("AnimationNodeStateMachineTransition_gw6sp"), "attack_2", "attack_3", SubResource("AnimationNodeStateMachineTransition_07t1j"), "attack_3", "idle", SubResource("AnimationNodeStateMachineTransition_5jqks"), "fall", "air_attack", SubResource("AnimationNodeStateMachineTransition_6o01y"), "air_attack", "fall", SubResource("AnimationNodeStateMachineTransition_cjn2x"), "idle", "blocking", SubResource("AnimationNodeStateMachineTransition_gtvsx"), "blocking", "idle", SubResource("AnimationNodeStateMachineTransition_pe5im"), "blocking", "block", SubResource("AnimationNodeStateMachineTransition_5qdki"), "block", "idle", SubResource("AnimationNodeStateMachineTransition_ovec4"), "fall", "land", SubResource("AnimationNodeStateMachineTransition_66260"), "land", "idle", SubResource("AnimationNodeStateMachineTransition_y3nvj"), "idle", "roll", SubResource("AnimationNodeStateMachineTransition_lrdbs"), "roll", "idle", SubResource("AnimationNodeStateMachineTransition_tqv5t"), "roll", "roll_attack", SubResource("AnimationNodeStateMachineTransition_pj7yp"), "roll_attack", "idle", SubResource("AnimationNodeStateMachineTransition_3r8hi"), "dash", "fall", SubResource("AnimationNodeStateMachineTransition_2sl67"), "dash", "idle", SubResource("AnimationNodeStateMachineTransition_44eq7")]
+graph_offset = Vector2(-325, 46.0281)
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_f3fll"]
 
