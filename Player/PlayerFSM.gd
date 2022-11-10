@@ -23,10 +23,6 @@ func _physics_process(delta):
 	set_player_orientation(input_axis)
 	set_deferred("is_taking_damage", false)
 	
-func set_state(old_state, new_state):
-	super.set_state(old_state, new_state)
-	print("Player state changed from %s to %s" % [str(old_state.name), str(new_state.name)])
-	
 func set_player_orientation(input_axis):
 	if input_axis.x < 0:
 		player.set_flipped(true)

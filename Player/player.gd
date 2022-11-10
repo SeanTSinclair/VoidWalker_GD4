@@ -12,6 +12,7 @@ signal take_damage(current_health)
 @onready var jump_gravity : float = ((-2.0 * stats.jump_height) / (stats.time_to_reach_peak * stats.time_to_reach_peak)) * -1.0
 @onready var fall_gravity : float = ((-2.0 * stats.jump_height) / (stats.time_to_reach_peak * stats.time_to_reach_peak)) * -1.0
 
+var has_drone : bool = false
 var is_blocking : bool = false
 var is_countering : bool = false
 var is_dodging : bool = false
