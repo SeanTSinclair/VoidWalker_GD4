@@ -1,4 +1,4 @@
-[gd_scene load_steps=91 format=3 uid="uid://d3eybhhghmlho"]
+[gd_scene load_steps=92 format=3 uid="uid://d3eybhhghmlho"]
 
 [ext_resource type="Texture2D" uid="uid://yoajrl7vte1r" path="res://Player/Sword Master Sprite Sheet 90x37.png" id="1_177ie"]
 [ext_resource type="Script" path="res://Player/Player.gd" id="1_lm3lh"]
@@ -17,6 +17,7 @@
 [ext_resource type="Script" path="res://Player/States/RollState.gd" id="13_abk6y"]
 [ext_resource type="Script" path="res://Player/InteractionManager.gd" id="13_osekf"]
 [ext_resource type="Script" path="res://Player/States/RollAttackState.gd" id="14_iwk5a"]
+[ext_resource type="Script" path="res://Player/States/ControlDroneState.gd" id="15_20lxq"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xluji"]
 radius = 5.0
@@ -746,6 +747,10 @@ state_name = "roll"
 [node name="RollAttack" type="Node" parent="StateMachine"]
 script = ExtResource("14_iwk5a")
 state_name = "roll_attack"
+
+[node name="ControlDrone" type="Node" parent="StateMachine"]
+script = ExtResource("15_20lxq")
+state_name = "control_drone"
 
 [node name="Hitbox" parent="." instance=ExtResource("11_rly4c")]
 collision_layer = 8

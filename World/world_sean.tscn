@@ -845,46 +845,46 @@ layer_0/tile_data = PackedInt32Array(262209, 131072, 3, 262208, 131072, 3, 19667
 
 [node name="UI" parent="." instance=ExtResource("9_nedon")]
 
-[node name="Content" type="Node" parent="."]
-
-[node name="Player" parent="Content" instance=ExtResource("1_eqp0r")]
+[node name="Player" parent="." instance=ExtResource("1_eqp0r")]
 position = Vector2(-1054, 37)
 scale = Vector2(5, 5)
 
-[node name="AnimationTree" parent="Content/Player/AnimationManager" index="1"]
+[node name="AnimationTree" parent="Player/AnimationManager" index="1"]
 parameters/playback = SubResource("AnimationNodeStateMachinePlayback_nkhb0")
 
-[node name="Camera2D" type="Camera2D" parent="Content/Player"]
+[node name="Camera2D" type="Camera2D" parent="Player"]
 current = true
 
-[node name="Drone" parent="Content" node_paths=PackedStringArray("player") instance=ExtResource("5_k787d")]
+[node name="Drone" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_k787d")]
 position = Vector2(-1162, 27)
 player = NodePath("../Player")
 
-[node name="DarkBot" parent="Content" instance=ExtResource("5_781e1")]
+[node name="Camera2D" type="Camera2D" parent="Drone"]
+
+[node name="DarkBot" parent="." instance=ExtResource("5_781e1")]
 position = Vector2(2808, 100)
 
-[node name="AnimationTree" parent="Content/DarkBot" index="3"]
+[node name="AnimationTree" parent="DarkBot" index="3"]
 parameters/playback = SubResource("AnimationNodeStateMachinePlayback_p8nmk")
 
-[node name="Wander" parent="Content/DarkBot/StateMachine" index="1"]
+[node name="Wander" parent="DarkBot/StateMachine" index="1"]
 state_name = null
 
-[node name="WanderPosA" parent="Content/DarkBot/StateMachine/Wander" index="0"]
+[node name="WanderPosA" parent="DarkBot/StateMachine/Wander" index="0"]
 position = Vector2(2142, 127)
 
-[node name="WanderPosB" parent="Content/DarkBot/StateMachine/Wander" index="1"]
+[node name="WanderPosB" parent="DarkBot/StateMachine/Wander" index="1"]
 position = Vector2(2954, 129)
 
-[node name="WanderTimer" type="Timer" parent="Content/DarkBot/StateMachine" index="2"]
+[node name="WanderTimer" type="Timer" parent="DarkBot/StateMachine" index="2"]
 one_shot = true
 autostart = true
 
-[node name="Potion" parent="Content" instance=ExtResource("8_8am8k")]
+[node name="Potion" parent="." instance=ExtResource("8_8am8k")]
 position = Vector2(-501, 135)
 
-[editable path="Content/Player"]
-[editable path="Content/Player/Hitbox"]
-[editable path="Content/Player/Hurtbox"]
-[editable path="Content/DarkBot"]
-[editable path="Content/DarkBot/Hurtbox"]
+[editable path="Player"]
+[editable path="Player/Hitbox"]
+[editable path="Player/Hurtbox"]
+[editable path="DarkBot"]
+[editable path="DarkBot/Hurtbox"]

@@ -34,6 +34,9 @@ func facing_direction() -> Vector2:
 	
 func input_enabled(enabled):
 	is_reading_input = enabled
+	
+func set_state_unlock(state, unlocked):
+	state.unlocked = unlocked
 
 func get_input_axis() -> Vector2:
 	var input_axis = Vector2.ZERO

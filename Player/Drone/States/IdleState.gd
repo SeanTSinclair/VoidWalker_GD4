@@ -15,3 +15,5 @@ func check_transitions():
 	super.check_transitions()
 	if actor.distance_to_player() > max_distance_to_target:
 		set_state(state_machine.states.follow)
+	elif actor.is_being_controlled: 
+		set_state(state_machine.states.controlled)

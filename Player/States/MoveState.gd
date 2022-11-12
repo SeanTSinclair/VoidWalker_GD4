@@ -40,6 +40,8 @@ func check_transitions():
 			set_state(states.dash)
 	elif Input.is_action_just_pressed("primary_attack"):
 		set_state(states.attack)
+	elif Input.is_action_just_pressed("control_drone"):
+		set_state(states.control_drone)
 	elif Input.is_action_just_pressed("block"):
 		set_state(states.block)
 	elif !is_on_floor:

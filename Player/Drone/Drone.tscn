@@ -1,12 +1,14 @@
-[gd_scene load_steps=18 format=3 uid="uid://4m4xv7ifuc1j"]
+[gd_scene load_steps=20 format=3 uid="uid://4m4xv7ifuc1j"]
 
 [ext_resource type="Script" path="res://Player/Drone/Drone.gd" id="1_omjcm"]
 [ext_resource type="Texture2D" uid="uid://45aenwpumi4w" path="res://Player/Drone/Companion PINK without shadow.png" id="1_w8ihb"]
 [ext_resource type="Script" path="res://Player/Drone/DroneFSM.gd" id="2_owsa6"]
 [ext_resource type="Script" path="res://Player/Drone/States/IdleState.gd" id="3_bp02j"]
 [ext_resource type="Script" path="res://Player/Drone/States/FollowState.gd" id="5_nc7vk"]
+[ext_resource type="Script" path="res://Player/Drone/States/ControlledState.gd" id="6_4dt6n"]
 [ext_resource type="Script" path="res://Player/Drone/Weapon.gd" id="6_4l22q"]
 [ext_resource type="PackedScene" uid="uid://deqqe8bdh83to" path="res://Player/Drone/Weapons/Beam.tscn" id="7_t7fw4"]
+[ext_resource type="Texture2D" uid="uid://cb6218i5v4dt5" path="res://Player/Drone/projectile_indicator.png" id="9_psrhv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0158f"]
 atlas = ExtResource("1_w8ihb")
@@ -78,6 +80,10 @@ state_name = "idle"
 script = ExtResource("5_nc7vk")
 state_name = "follow"
 
+[node name="Controlled" type="Node" parent="StateMachine"]
+script = ExtResource("6_4dt6n")
+state_name = "controlled"
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -4)
 shape = SubResource("CircleShape2D_1etvu")
@@ -88,3 +94,10 @@ projectile = ExtResource("7_t7fw4")
 
 [node name="ProjectileSpawnPosition" type="Node2D" parent="."]
 position = Vector2(0, -4)
+
+[node name="Indicator" type="Sprite2D" parent="."]
+modulate = Color(0.633757, 0.633757, 0.633757, 0.784314)
+texture_filter = 1
+position = Vector2(0, -4)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("9_psrhv")
