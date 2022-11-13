@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://c4fcfydypcid3"]
+[gd_scene load_steps=52 format=3 uid="uid://c4fcfydypcid3"]
 
 [ext_resource type="Script" path="res://Enemies/Dark Bot/DarkBot.gd" id="1_3javn"]
 [ext_resource type="Texture2D" uid="uid://dctuqtyep3sqg" path="res://Enemies/Dark Bot/spritesheet.png" id="2_sooyw"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://Enemies/Common/StunnedState.gd" id="9_83jsi"]
 [ext_resource type="Script" path="res://Enemies/Common/Attack.gd" id="9_gdq68"]
 [ext_resource type="PackedScene" uid="uid://c520yh1b7whrw" path="res://Common/Hurtbox.tscn" id="10_llibk"]
+[ext_resource type="Script" path="res://Enemies/Common/DeadState.gd" id="10_yc2tg"]
 [ext_resource type="Script" path="res://Common/Hitbox.gd" id="11_opiwm"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fcsqb"]
@@ -91,13 +92,27 @@ tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
+tracks/0/interp = 0
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
+"update": 0,
 "values": [28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_k7okd"]
@@ -107,12 +122,12 @@ tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
+tracks/0/interp = 0
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(1, 1),
-"update": 1,
+"update": 0,
 "values": [20, 21]
 }
 
@@ -265,12 +280,12 @@ auto_advance = true
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_gw6p4"]
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_lqrlk"]
-states/End/position = Vector2(661, 93)
+states/End/position = Vector2(654, 93)
 states/Start/position = Vector2(219, 93)
 states/attack/node = SubResource("AnimationNodeAnimation_jimch")
 states/attack/position = Vector2(331, 13)
 states/death/node = SubResource("AnimationNodeAnimation_agtvm")
-states/death/position = Vector2(545, 93)
+states/death/position = Vector2(549, 93)
 states/hit/node = SubResource("AnimationNodeAnimation_66wgv")
 states/hit/position = Vector2(448, 93)
 states/idle/node = SubResource("AnimationNodeAnimation_swhq3")
@@ -372,6 +387,10 @@ state_name = "stunned"
 
 [node name="Timer" type="Timer" parent="StateMachine/Stunned"]
 one_shot = true
+
+[node name="Dead" type="Node" parent="StateMachine"]
+script = ExtResource("10_yc2tg")
+state_name = "dead"
 
 [node name="DetectionArea" type="Area2D" parent="."]
 collision_layer = 0

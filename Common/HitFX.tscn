@@ -1,0 +1,58 @@
+[gd_scene load_steps=13 format=3 uid="uid://p1fh84b1s5lg"]
+
+[ext_resource type="Script" path="res://Common/HitFX.gd" id="1_1eunx"]
+[ext_resource type="Texture2D" uid="uid://dffcvatj1ffic" path="res://Common/Blood hit 3.png" id="1_ajfe1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j5m5d"]
+atlas = ExtResource("1_ajfe1")
+region = Rect2(0, 0, 82, 65)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ujg3l"]
+atlas = ExtResource("1_ajfe1")
+region = Rect2(82, 0, 82, 65)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o264s"]
+atlas = ExtResource("1_ajfe1")
+region = Rect2(164, 0, 82, 65)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r8f02"]
+atlas = ExtResource("1_ajfe1")
+region = Rect2(246, 0, 82, 65)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u8mk0"]
+atlas = ExtResource("1_ajfe1")
+region = Rect2(328, 0, 82, 65)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n5wp1"]
+atlas = ExtResource("1_ajfe1")
+region = Rect2(410, 0, 82, 65)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8rjur"]
+atlas = ExtResource("1_ajfe1")
+region = Rect2(492, 0, 82, 65)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j15mq"]
+atlas = ExtResource("1_ajfe1")
+region = Rect2(574, 0, 82, 65)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qqjhk"]
+atlas = ExtResource("1_ajfe1")
+region = Rect2(656, 0, 82, 65)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ngbu6"]
+animations = [{
+"frames": [SubResource("AtlasTexture_j5m5d"), SubResource("AtlasTexture_ujg3l"), SubResource("AtlasTexture_o264s"), SubResource("AtlasTexture_r8f02"), SubResource("AtlasTexture_u8mk0"), SubResource("AtlasTexture_n5wp1"), SubResource("AtlasTexture_8rjur"), SubResource("AtlasTexture_j15mq"), SubResource("AtlasTexture_qqjhk")],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="HitFX" type="Node2D"]
+script = ExtResource("1_1eunx")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.3, 0.3)
+frames = SubResource("SpriteFrames_ngbu6")
+speed_scale = 3.0
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

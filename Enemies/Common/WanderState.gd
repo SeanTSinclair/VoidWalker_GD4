@@ -26,6 +26,7 @@ func exit_state():
 
 func state_logic(delta):
 	super.state_logic(delta)
+	actor.apply_gravity(delta)
 	actor.velocity.x = actor.direction_to(wander_target).x * actor.stats.move_speed
 	
 func check_transitions():

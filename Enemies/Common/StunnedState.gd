@@ -16,6 +16,10 @@ func exit_state():
 	stun_finished = false
 	actor.is_stunned = false
 	
+func state_logic(delta):
+	super.state_logic(delta)
+	actor.apply_gravity(delta)
+	
 func check_transitions():
 	super.check_transitions()
 	if stun_finished:

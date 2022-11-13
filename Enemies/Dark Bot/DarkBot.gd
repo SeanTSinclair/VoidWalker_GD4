@@ -1,25 +1,32 @@
 extends CharacterBody2D
+const KNOCKBACK_FORCE : float = 230.0
 
 @export var health : int = 3
 
 @onready var sprite = $Sprite2D
 @onready var stats = preload("res://Enemies/Dark Bot/DarkBotStats.tres")
 @onready var animation_tree = $AnimationTree
-@onready var state_machine = animation_tree["parameters/playback"]
+@onready var animator = animation_tree["parameters/playback"]
+@onready var state_machine = $StateMachine
 @onready var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var start_position : Vector2 = position
 @onready var line_of_sight_ray : RayCast2D= $VisionCast
 @onready var target_ray : RayCast2D = $TargetCast
 @onready var alert_icon : Sprite2D = $AlertIcon
 @onready var hitbox = $Hitbox
+@onready var hurtbox = $Hurtbox
+@onready var hit_fx : PackedScene = preload("res://Common/HitFX.tscn")
 
 var facing_direction : Vector2 = Vector2.RIGHT
+var knockback : Vector2 = Vector2.ZERO
 var player_in_range : bool = false
 var has_spotted_player : bool = false
 var player = null
 var is_stunned : bool = false
 
 func _physics_process(delta):
+	knockback = knockback.move_toward(Vector2.ZERO, stats.friction * delta)
+	position += knockback * delta
 	move_and_slide()
 	update_facing_direction()
 	if target_ray.enabled: 
@@ -77,7 +84,7 @@ func distance_to(target) -> float:
 	return global_position.distance_to(target)
 		
 func set_animation_state(state):
-	state_machine.travel(state)
+	animator.travel(state)
 	
 func indicate_alert():
 	alert_icon.visible = true
@@ -86,6 +93,10 @@ func indicate_alert():
 	
 func counter():
 	is_stunned = true
+
+func disable():
+	hurtbox.disconnect("area_entered", Callable(self, "_on_hurtbox_area_entered"))
+	set_physics_process(false)
 
 func _on_detection_area_body_entered(body):
 	player_in_range = true
@@ -99,6 +110,9 @@ func _on_detection_area_body_exited(body):
 
 func _on_hurtbox_area_entered(area):
 	health -= area.damage
-	# Knockback
+	set_animation_state("hit")
+	knockback = (direction_to(area.global_position) * KNOCKBACK_FORCE).rotated(angle_to_player() - 8)
+	add_child(hit_fx.instantiate())
 	if health <= 0: 
-		queue_free()
+		state_machine.current_state.set_state(state_machine.states.dead)
+		disable()

@@ -18,6 +18,9 @@ var is_blocking : bool = false
 var is_countering : bool = false
 var is_dodging : bool = false
 
+func _physics_process(delta):
+	move_and_slide()
+
 func set_flipped(is_flipped):
 	if is_flipped: 
 		sprite.flip_h = true
@@ -27,28 +30,25 @@ func set_flipped(is_flipped):
 		sprite.flip_h = false
 		sprite.offset = Vector2(17, 0)
 		hitbox.scale.x = 1
-		
+
 func set_animation_state(state):
 	animation_manager.set_animation_state(state)
-	
+
 func camera_active(is_active):
 	camera.current = is_active
 
-func _physics_process(delta):
-	move_and_slide()
-	
 func apply_gravity(delta):
 	velocity.y += get_gravity() * delta
 
 func get_gravity() -> float:
 	return jump_gravity if velocity.y < 0.0 else fall_gravity
-	
+
 func slow_to_stop():
 	velocity.x = move_toward(velocity.x, 0, stats.friction)
-	
+
 func heal(amount): 
 	stats.heal(amount)
-	
+
 func reset_dodge():
 	is_dodging = false
 
