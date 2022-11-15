@@ -8,8 +8,8 @@ var has_queued_jump : bool = false
 var is_finished : bool = false
 var roll_direction : Vector2 = Vector2.ZERO
 
-func enter_state(actor):
-	super.enter_state(actor)
+func enter_state(parent):
+	super.enter_state(parent)
 	can_roll_attack = true
 	has_queued_attack = false
 	has_queued_jump = false

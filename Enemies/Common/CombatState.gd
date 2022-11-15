@@ -25,8 +25,8 @@ func _ready():
 			else: 
 				melee_attacks.append(child)
 
-func enter_state(actor):
-	super.enter_state(actor)
+func enter_state(parent):
+	super.enter_state(parent)
 	actor.player_in_range = true
 	actor.target_ray.enabled = true
 	decide_strategy()
@@ -85,10 +85,15 @@ func try_attack():
 	else: 
 		attack = random_melee_attack()
 	if attack != null:
+		actor.set_animation_state("hit")
+		await get_tree().create_timer(.4).timeout
 		attack.attack()
 		attack_finished = false
 		get_tree().create_timer(attack.attack_duration).connect("timeout", Callable(self, "attack_is_finished"))
 		get_tree().create_timer(attack.attack_duration + randf_range(0.5, 2)).connect("timeout", Callable(self, "enable_attack"))
+
+func flash():
+	print("About to attack!")
 
 func create_spacing():
 	var desired_move_direction = actor.direction_to_player() * -1
@@ -117,6 +122,8 @@ func enable_attack():
 func attack_is_finished():
 	attack_finished = true
 
-func use_attack(animation, duration):
+func use_attack(animation, _duration):
+	if actor == null:
+		return
 	actor.set_animation_state(animation)
 	can_attack = false

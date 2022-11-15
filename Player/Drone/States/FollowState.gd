@@ -2,8 +2,8 @@ extends State
 
 var stopping_distance = 100
 
-func enter_state(actor):
-	super.enter_state(actor)
+func enter_state(parent):
+	super.enter_state(parent)
 	actor.set_animation_state("following")
 
 func state_logic(delta):

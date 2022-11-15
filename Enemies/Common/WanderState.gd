@@ -14,8 +14,8 @@ func _ready():
 			wander_targets.append(child.global_position)
 			child.queue_free()
 
-func enter_state(actor):
-	super.enter_state(actor)
+func enter_state(parent):
+	super.enter_state(parent)
 	actor.set_animation_state("run")
 	wander_targets.shuffle()
 	wander_target = wander_targets[0]
@@ -26,12 +26,13 @@ func exit_state():
 
 func state_logic(delta):
 	super.state_logic(delta)
+	if actor == null: 
+		return
 	actor.apply_gravity(delta)
 	actor.velocity.x = actor.direction_to(wander_target).x * actor.stats.move_speed
 	
 func check_transitions():
 	super.check_transitions()
-		
 	if actor.global_position.distance_to(wander_target) <= stopping_distance:
 		if state_machine.is_wandering:
 			set_state(state_machine.states.wander)

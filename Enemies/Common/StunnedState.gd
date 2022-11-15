@@ -5,16 +5,17 @@ extends State
 
 var stun_finished : bool = false
 
-func enter_state(actor):
-	super.enter_state(actor)
+func enter_state(parent):
+	super.enter_state(parent)
 	actor.set_animation_state("stunned")
 	timer.start(stun_duration)
+	actor.velocity = Vector2.ZERO
 	stun_finished = false
 	
 func exit_state():
+	actor.is_stunned = false
 	super.exit_state()
 	stun_finished = false
-	actor.is_stunned = false
 	
 func state_logic(delta):
 	super.state_logic(delta)

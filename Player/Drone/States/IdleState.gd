@@ -3,8 +3,8 @@ extends State
 var friction = 150
 var max_distance_to_target = 150
 
-func enter_state(actor):
-	super.enter_state(actor)
+func enter_state(parent):
+	super.enter_state(parent)
 	actor.call_deferred("set_animation_state", "idle")
 
 func state_logic(delta):

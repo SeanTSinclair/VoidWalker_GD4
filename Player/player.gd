@@ -18,7 +18,7 @@ var is_blocking : bool = false
 var is_countering : bool = false
 var is_dodging : bool = false
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	move_and_slide()
 
 func set_flipped(is_flipped):

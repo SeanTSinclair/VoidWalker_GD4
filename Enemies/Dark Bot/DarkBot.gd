@@ -1,5 +1,5 @@
 extends CharacterBody2D
-const KNOCKBACK_FORCE : float = 230.0
+const KNOCKBACK_FORCE : float = 80.0
 
 @export var health : int = 3
 
@@ -103,7 +103,7 @@ func _on_detection_area_body_entered(body):
 	target_ray.enabled = true
 	player = body
 	
-func _on_detection_area_body_exited(body):
+func _on_detection_area_body_exited(_body):
 	player_in_range = false
 	target_ray.enabled = false
 	player = null
@@ -111,7 +111,7 @@ func _on_detection_area_body_exited(body):
 func _on_hurtbox_area_entered(area):
 	health -= area.damage
 	set_animation_state("hit")
-	knockback = (direction_to(area.global_position) * KNOCKBACK_FORCE).rotated(angle_to_player() - 8)
+	knockback = (direction_to(area.global_position) * KNOCKBACK_FORCE).rotated(-30)
 	add_child(hit_fx.instantiate())
 	if health <= 0: 
 		state_machine.current_state.set_state(state_machine.states.dead)

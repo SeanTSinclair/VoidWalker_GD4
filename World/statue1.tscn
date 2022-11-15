@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dl375pdim24ow"]
+
+[ext_resource type="Texture2D" uid="uid://gino4tcb3wf" path="res://Guardian Statue1.png" id="1_ugypd"]
+
+[node name="Statue" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+z_index = 2
+texture = ExtResource("1_ugypd")

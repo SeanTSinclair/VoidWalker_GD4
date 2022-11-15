@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://d2hpe31tulk7o"]
+
+[ext_resource type="Texture2D" uid="uid://dpap78yn01vkb" path="res://Heart Hoarder Statue1.png" id="1_h8usn"]
+
+[node name="Statue" type="Node2D"]
+z_index = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+z_index = -1
+texture = ExtResource("1_h8usn")

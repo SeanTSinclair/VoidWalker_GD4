@@ -1,7 +1,7 @@
 extends State
 
-func enter_state(actor):
-	super.enter_state(actor)
+func enter_state(parent):
+	super.enter_state(parent)
 	actor.set_animation_state("roll_attack")
 	state_machine.input_enabled(false)
 	

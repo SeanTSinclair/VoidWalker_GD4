@@ -318,6 +318,7 @@ size = Vector2(12.75, 13.25)
 scale = Vector2(4, 4)
 collision_layer = 4
 script = ExtResource("1_3javn")
+health = 5
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1

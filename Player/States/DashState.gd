@@ -29,10 +29,10 @@ func check_transitions():
 		else:
 			set_state(states.in_air)
 
-func enter_state(actor):
-	super.enter_state(actor)
+func enter_state(parent):
+	super.enter_state(parent)
 	actor.set_animation_state("dash")
-	var dash_direction = state_machine.get_input_axis()
+	dash_direction = state_machine.get_input_axis()
 	if dash_direction == Vector2.ZERO:
 		dash_direction = state_machine.facing_direction()
 	actor.velocity = dash_direction * actor.stats.dash_speed

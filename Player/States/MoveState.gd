@@ -5,8 +5,8 @@ var input_axis = Vector2.ZERO
 var states = null
 var move_speed = 0
 
-func enter_state(actor):
-	super.enter_state(actor)
+func enter_state(parent):
+	super.enter_state(parent)
 	move_speed = actor.stats.move_speed
 
 func state_logic(delta):
@@ -16,7 +16,7 @@ func state_logic(delta):
 		move_speed = actor.stats.run_speed
 	else:
 		actor.set_animation_state("walk")
-		actor.stats.move_speed
+		move_speed = actor.stats.move_speed
 	input_axis = state_machine.get_input_axis()
 	if input_axis.x > 0: input_axis.x = 1
 	elif input_axis.x < 0: input_axis.x = -1

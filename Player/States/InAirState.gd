@@ -10,8 +10,8 @@ const JUMP_BUFFER : float = 0.2
 
 var states = null
 
-func enter_state(actor):
-	super.enter_state(actor)
+func enter_state(parent):
+	super.enter_state(parent)
 	if state_machine.previous_state != state_machine.states.jump:
 		coyote_timer.start(COYOTE_TIME)
 
@@ -40,7 +40,6 @@ func check_transitions():
 	if states == null:
 		states = state_machine.states
 	var is_on_floor = state_machine.is_on_floor
-	var is_dashing = state_machine.is_dashing
 	
 	if is_on_floor:
 		state_machine.dash_count = 0

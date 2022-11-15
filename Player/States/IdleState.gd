@@ -2,8 +2,8 @@ extends State
 
 var states = null
 
-func enter_state(actor):
-	super.enter_state(actor)
+func enter_state(parent):
+	super.enter_state(parent)
 	state_machine.can_air_attack = true
 
 func state_logic(delta):

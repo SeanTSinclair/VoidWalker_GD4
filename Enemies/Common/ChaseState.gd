@@ -3,8 +3,8 @@ extends State
 const CHASE_RANGE : float = 500.0
 const COMBAT_RANGE : float = 150.0
 
-func enter_state(actor):
-	super.enter_state(actor)
+func enter_state(parent):
+	super.enter_state(parent)
 	actor.set_animation_state("run")
 	actor.indicate_alert()
 	

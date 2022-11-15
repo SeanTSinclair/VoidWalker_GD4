@@ -18,5 +18,5 @@ func _on_wander_timer_timeout():
 func _on_detection_area_body_entered(body):
 	target = body
 
-func _on_detection_area_body_exited(body):
+func _on_detection_area_body_exited(_body):
 	target = null 

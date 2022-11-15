@@ -7,7 +7,7 @@ class_name State
 var actor = null
 var state_machine = null
 
-func state_logic(delta):
+func state_logic(_delta):
 	if actor == null || state_machine == null:
 		return
 	
@@ -18,8 +18,8 @@ func check_transitions():
 func set_state(state):
 	state_machine.set_state(self, state)
 	
-func enter_state(actor):
-	self.actor = actor
+func enter_state(parent):
+	self.actor = parent
 	
 func exit_state():
 	actor = null

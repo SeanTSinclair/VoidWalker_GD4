@@ -57,8 +57,8 @@ func check_transitions():
 			set_state(states.idle)
 
 
-func enter_state(actor):
-	super.enter_state(actor)
+func enter_state(parent):
+	super.enter_state(parent)
 	attacks = get_children()
 	max_attacks_in_sequence = attacks.size()
 	queue_next_attack()

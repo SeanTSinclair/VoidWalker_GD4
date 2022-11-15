@@ -18,7 +18,7 @@ func _ready():
 	if player != null:
 		player.drone = self
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if player == null: return
 	if !is_being_controlled:
 		set_vertical_position()
