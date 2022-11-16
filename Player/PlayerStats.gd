@@ -24,6 +24,7 @@ signal health_changed
 		health = value
 		emit_signal("health_changed")
 @export var max_health : int = 3
+@export var i_frame_duration : float = 0.25
 
 func heal(amount):
 	self.health = min(self.health + amount, max_health)

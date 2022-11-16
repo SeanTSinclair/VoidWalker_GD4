@@ -11,7 +11,7 @@ func _physics_process(delta):
 		position.y += fall_speed * delta
 
 func _on_player_detected(_body):
-	$PlayerDetection/CollisionShape2D.disabled = true
+	set_deferred("disabled", $PlayerDetection/CollisionShape2D)
 	animated_sprite.animation = "snap"
 	animated_sprite.connect("animation_finished", Callable(self, "snap_finished"))
 	

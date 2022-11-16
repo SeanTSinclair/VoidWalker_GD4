@@ -29,7 +29,7 @@ func check_transitions():
 	var is_on_floor = state_machine.is_on_floor
 	var is_dashing = state_machine.is_dashing
 	
-	if !is_dashing && state_machine.get_input_axis() == Vector2.ZERO:
+	if !is_dashing && state_machine.get_input_axis().x == 0:
 		set_state(states.idle)
 	elif Input.is_action_just_pressed("jump") && is_on_floor:
 		set_state(states.jump)

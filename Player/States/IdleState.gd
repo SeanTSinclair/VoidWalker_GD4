@@ -33,5 +33,5 @@ func check_transitions():
 		set_state(states.block)
 	elif Input.is_action_just_pressed("control_drone"):
 		set_state(states.control_drone)
-	elif !is_dashing && state_machine.get_input_axis() != Vector2.ZERO:
+	elif !is_dashing && state_machine.get_input_axis().x != 0:
 		set_state(states.move)

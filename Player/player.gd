@@ -7,6 +7,7 @@ signal take_damage(current_health)
 @onready var animation_manager = $AnimationManager
 @onready var sprite = $Sprite2D
 @onready var hitbox = $Hitbox
+@onready var hurtbox = $Hurtbox
 @onready var state_machine = $StateMachine
 @onready var camera = $Camera2D
 
@@ -46,6 +47,9 @@ func get_gravity() -> float:
 func slow_to_stop():
 	velocity.x = move_toward(velocity.x, 0, stats.friction)
 
+func trigger_invincibility():
+	hurtbox.start_invincibility(stats.i_frame_duration)
+
 func heal(amount): 
 	stats.heal(amount)
 
@@ -58,6 +62,7 @@ func _on_hurtbox_area_entered(area):
 	elif !is_blocking:
 		stats.health -= area.damage
 		Input.start_joy_vibration(0, 1, .4, 0.2)
+		hurtbox.start_invincibility(0.4)
 		emit_signal("take_damage", stats.health)
 		if stats.health <= 0:
 			emit_signal("dead")

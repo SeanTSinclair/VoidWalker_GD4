@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://c4fcfydypcid3"]
+[gd_scene load_steps=52 format=3 uid="uid://bvq0ohxkbnu8f"]
 
 [ext_resource type="Script" path="res://Enemies/Dark Bot/DarkBot.gd" id="1_3javn"]
 [ext_resource type="Texture2D" uid="uid://dctuqtyep3sqg" path="res://Enemies/Dark Bot/spritesheet.png" id="2_sooyw"]
@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://Enemies/Common/IdleState.gd" id="4_i2bc8"]
 [ext_resource type="Script" path="res://Enemies/Common/WanderState.gd" id="5_e3xmk"]
 [ext_resource type="Script" path="res://Enemies/Common/ChaseState.gd" id="6_klq5s"]
-[ext_resource type="Script" path="res://Enemies/Common/CombatState.gd" id="8_x2glc"]
+[ext_resource type="Script" path="res://Enemies/Dark Bot/CombatState.gd" id="8_x2glc"]
 [ext_resource type="Texture2D" uid="uid://dsfijabufh12c" path="res://Enemies/Common/alert.png" id="9_41dsk"]
 [ext_resource type="Script" path="res://Enemies/Common/StunnedState.gd" id="9_83jsi"]
 [ext_resource type="Script" path="res://Enemies/Common/Attack.gd" id="9_gdq68"]
@@ -316,6 +316,7 @@ size = Vector2(12.75, 13.25)
 
 [node name="DarkBot" type="CharacterBody2D"]
 scale = Vector2(4, 4)
+z_index = 4
 collision_layer = 4
 script = ExtResource("1_3javn")
 health = 5
@@ -366,7 +367,7 @@ state_name = "chase"
 
 [node name="Combat" type="Node" parent="StateMachine"]
 script = ExtResource("8_x2glc")
-melee_distance = 70.0
+melee_distance = 40.0
 state_name = "combat"
 
 [node name="Gun" type="Node" parent="StateMachine/Combat"]

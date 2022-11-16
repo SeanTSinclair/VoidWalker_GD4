@@ -3,14 +3,12 @@ extends Area2D
 signal invincibility_started
 signal invincibility_ended
 
-var invincible : bool = false :
-	get: return invincible
-	set(value): set_invincible(value) 
+var invincible : bool = false
 
 @onready var timer = $Timer
 @onready var collision_shape = $CollisionShape2D
 
-func set_invincible(value):
+func set_invincible(value: bool):
 	invincible = value
 	if invincible:
 		emit_signal("invincibility_started")

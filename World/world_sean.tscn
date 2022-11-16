@@ -1,8 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://bgr6rl5qmd6r7"]
+[gd_scene load_steps=17 format=3 uid="uid://bgr6rl5qmd6r7"]
 
 [ext_resource type="PackedScene" uid="uid://d3eybhhghmlho" path="res://Player/Player.tscn" id="1_eqp0r"]
 [ext_resource type="Script" path="res://World/World.gd" id="1_hn4xj"]
-[ext_resource type="PackedScene" uid="uid://c4fcfydypcid3" path="res://Enemies/Dark Bot/DarkBot.tscn" id="5_781e1"]
+[ext_resource type="PackedScene" uid="uid://bvq0ohxkbnu8f" path="res://Enemies/Dark Bot/DarkBot.tscn" id="5_781e1"]
 [ext_resource type="PackedScene" uid="uid://4m4xv7ifuc1j" path="res://Player/Drone/Drone.tscn" id="5_k787d"]
 [ext_resource type="PackedScene" uid="uid://dl375pdim24ow" path="res://World/statue1.tscn" id="7_0bk7k"]
 [ext_resource type="PackedScene" uid="uid://d2hpe31tulk7o" path="res://World/statue2.tscn" id="8_4g5lv"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bls3onholw0it" path="res://World/Traps/HangingSword.tscn" id="8_b7rsv"]
 [ext_resource type="PackedScene" uid="uid://bl8xt6q6unswl" path="res://Player/UI/UI.tscn" id="9_nedon"]
 [ext_resource type="Texture2D" uid="uid://vtjklj7ydwwd" path="res://World/Blood Temple Tileset.png" id="10_o41tb"]
+[ext_resource type="PackedScene" uid="uid://v5qjiek1rqs4" path="res://Enemies/FlowerMob/FlowerMob.tscn" id="11_3icoh"]
 
 [sub_resource type="Texture2D" id="Texture2D_thcyr"]
 resource_local_to_scene = false
@@ -873,6 +874,7 @@ parameters/playback = SubResource("AnimationNodeStateMachinePlayback_nkhb0")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 current = true
+zoom = Vector2(0.9, 0.9)
 
 [node name="Drone" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_k787d")]
 position = Vector2(-1149, 4)
@@ -881,6 +883,7 @@ player = NodePath("../Player")
 move_speed = 300.0
 
 [node name="Camera2D" type="Camera2D" parent="Drone"]
+zoom = Vector2(0.9, 0.9)
 
 [node name="DarkBot" parent="." instance=ExtResource("5_781e1")]
 position = Vector2(1493, 100)
@@ -908,7 +911,7 @@ position = Vector2(2516, 122)
 position = Vector2(5, -201)
 
 [node name="Statue2" parent="." instance=ExtResource("8_4g5lv")]
-position = Vector2(-616, -37)
+position = Vector2(936, -5)
 scale = Vector2(4, 4)
 z_index = 1
 
@@ -916,6 +919,9 @@ z_index = 1
 position = Vector2(-1431, 6)
 scale = Vector2(4, 4)
 z_index = 1
+
+[node name="FlowerMob" parent="." instance=ExtResource("11_3icoh")]
+position = Vector2(-547, 164)
 
 [editable path="Player"]
 [editable path="Player/Hitbox"]
